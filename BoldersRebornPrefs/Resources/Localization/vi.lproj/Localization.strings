@@ -1,0 +1,49 @@
+LABEL_OPTIONS_FOOTER_TEXT = "Ví dụ: $t có $c ứng dụng.
+Kết quả: Tên thư mục có 23 ứng dụng.";
+LABEL_OPTIONS_LABEL = "Tùy chọn nhãn:";
+HOMESCREEN = "Màn hình chính";
+COUNT_TEXT = "Đếm văn bản:";
+ROWS = "↓ HÀNG MỖI TRANG";
+COLUMNS_FOOTER_TEXT = "→ CÁC ICON MỖI HÀNG";
+BUILD_ROOTLESS = "Xây dựng: Rootless";
+BUILD_ROOTFUL = "Xây dựng: Rootful";
+
+TITLE_SCALE = "TỈ LỆ TÊN (%)";
+TITLE_TRANSPARENCY = "ĐỘ MỜ TÊN (%)";
+TITLE_OFFSET = "ĐỘ DỊCH TÊN [-↑ / +↓]";
+SUBTITLE_SCALE = "TỈ LỆ PHỤ ĐỀ (%)";
+SUBTITLE_TRANSPARENCY = "ĐỘ MỜ PHỤ ĐỀ (%)";
+SUBTITLE_OFFSET = "ĐỘ DỊCH PHỤ ĐỀ [-↑ / +↓]";
+HORIZONTAL_ICON_INSET_FOOTER_TEXT = "Có thể sử dụng để thu gọn hai bên của biểu tượng của bạn gần nhau hơn.";
+HORIZONTAL_ICON_INSET = "KHOẢNG CÁCH BIỂU TƯỢNG THEO CHIỀU NGANG";
+TOP_ICON_INSET_FOOTER_TEXT = "Khoảng cách phía trên của biểu tượng.";
+TOP_ICON_INSET = "KHOẢNG CÁCH BIỂU TƯỢNG PHÍA TRÊN";
+VERTICAL_ICON_SPACING_FOOTER_TEXT = "Khoảng cách dọc của biểu tượng.";
+VERTICAL_ICON_SPACING = "KHOẢNG CÁCH BIỂU TƯỢNG THEO CHIỀU DỌC";
+HORIZONTAL_OFFSET_FOOTER_TEXT = "Độ dịch ngang của thư mục so với vị trí ban đầu.";
+HORIZONTAL_OFFSET = "ĐỘ DỊCH NGANG";
+ICON_SCALE = "TỈ LỆ BIỂU TƯỢNG (%)";
+HOMESCREEN_ICON_BLUR_FOOTER_TEXT = "Đã kích hoạt: Nền mờ bao gồm các biểu tượng trên màn hình chính.
+
+Đã tắt: Nền mờ là một bản mờ của hình nền màn hình chính.";
+HOMESCREEN_ICON_BLUR = "Mờ biểu tượng Màn hình chính";
+HOMESCREEN_BLUR = "Mờ màn hình chính";
+HOMESCREEN_ICON_BLUR_ON_INFO_DESCRIPTION = "Nền mờ bao gồm các biểu tượng trên màn hình chính.";
+HOMESCREEN_ICON_BLUR_OFF_INFO_DESCRIPTION = "Nền mờ là một bản mờ của hình nền màn hình chính.";
+DISMISS_AND_APPLY = "Bỏ qua và Áp dụng";
+
+RESPRING = "Khởi động lại";
+RESET_PREFS = "Thiết lập lại các tùy chọn";
+DEFAULT_APPS = "$c ỨNG DỤNG";
+
+RESET_PREFERENCES_QUESTION = "Thiết lập lại tùy chọn?";
+RESET_PREFERENCES_DESCRIPTION = "Hành động này không thể hoàn tác.";
+
+RESET_RESET = "Thiết lập lại";
+
+CANCEL = "Hủy";
+OK = "Đồng ý";
+
+SET_SLIDER_VALUE = "Thiết lập giá trị thanh trượt";
+MAX_VALUE = "Giá trị tối đa";
+MIN_VALUE = "Giá trị tối thiểu";

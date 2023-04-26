@@ -1,0 +1,49 @@
+LABEL_OPTIONS_FOOTER_TEXT = "Esimerkki: $t on $c sovellukset.
+Tulos: Kansiossa on 23 sovellusta.";
+LABEL_OPTIONS_LABEL = "Merkinnän vaihtoehdot:";
+HOMESCREEN = "Kotinäkymä";
+COUNT_TEXT = "Laske Teksti:";
+ROWS = "↓ RIVET/SIVU";
+COLUMNS_FOOTER_TEXT = "→ KUVAKKEET/RIVI";
+BUILD_ROOTLESS = "Rakentaa: Juureton/Rootless";
+BUILD_ROOTFUL = "Rakentaa: Juurella/Rootful";
+
+TITLE_SCALE = "OTSIKON SKAALAUS (%)";
+TITLE_TRANSPARENCY = "OTSIKON LÄPINÄKYVYYS (%)";
+TITLE_OFFSET = "OTSIKON ULOS-SIIRTYMÄ [-↑ / +↓]";
+SUBTITLE_SCALE = "TEKSTITYKSEN SKAALAUS (%)";
+SUBTITLE_TRANSPARENCY = "TEKSTITYKSEN LÄPINÄKYVYYS (%)";
+SUBTITLE_OFFSET = "TEKSTITYKSEN ULOS-SIIRTYMÄ [-↑ / +↓]";
+HORIZONTAL_ICON_INSET_FOOTER_TEXT = "Tätä voidaan käyttää puristamaan kuvakkeiden sivuja lähemmäksi.";
+HORIZONTAL_ICON_INSET = "KUVAKKEIDEN VAAKASUORAN SISÄLLE-SIIRTYMÄ";
+TOP_ICON_INSET_FOOTER_TEXT = "Ylimääräinen toppaus yläpuolelta.";
+TOP_ICON_INSET = "YLÄ-KUVAKKEIDEN SISÄLLE-SIIRTYMÄ";
+VERTICAL_ICON_SPACING_FOOTER_TEXT = "Kuvakkeiden pystysuuntainen välit.";
+VERTICAL_ICON_SPACING = "KUVAKKEIDEN PYSTYSUUNNAN SISÄLLE-SIIRTYMÄ";
+HORIZONTAL_OFFSET_FOOTER_TEXT = "Kansion vaakasuuntainen ulos-siirtymä alkuperäisestä sijainnistaan.";
+HORIZONTAL_OFFSET = "VAAKASUORA ULOS-SIIRTYMÄ";
+ICON_SCALE = "KUVAKKEIDEN SKAALAUS (%)";
+HOMESCREEN_ICON_BLUR_FOOTER_TEXT = "Käytössä: Taustan sumennus, jonka sumennus on kotinäkymän taustakuvassa.
+
+Poiskäytössä: Taustan sumennus, jonka sisältää kotinäkymän kuvakkeita.";
+HOMESCREEN_ICON_BLUR = "KOTINÄKYMÄN KUVAKKEIDEN SUMENNUS";
+HOMESCREEN_BLUR = "Kotinäkymän sumennus";
+HOMESCREEN_ICON_BLUR_ON_INFO_DESCRIPTION = "Taustan sumennus, jonka sumennus on kotinäkymän taustakuvassa.";
+HOMESCREEN_ICON_BLUR_OFF_INFO_DESCRIPTION = "Taustan sumennus, jonka sisältää kotinäkymän kuvakkeita.";
+DISMISS_AND_APPLY = "Hylätä ja Käyttää";
+
+RESPRING = "Nopeakäynnistys";
+RESET_PREFS = "Nollaa asetukset";
+DEFAULT_APPS = "$c SOVELLUS";
+
+RESET_PREFERENCES_QUESTION = "Nollataanko asetukset?";
+RESET_PREFERENCES_DESCRIPTION = "Tätä ei voi perua.";
+
+RESET_RESET = "Nollaa";
+
+CANCEL = "Peruta";
+OK = "OK";
+
+SET_SLIDER_VALUE = "Aseta liukusäädin arvo";
+MAX_VALUE = "Maksimiarvo";
+MIN_VALUE = "Minimiarvo";

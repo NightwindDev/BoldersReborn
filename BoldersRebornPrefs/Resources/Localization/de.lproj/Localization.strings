@@ -1,0 +1,49 @@
+LABEL_OPTIONS_FOOTER_TEXT = "Beispiel: $t hat $c Apps.
+Ergebnis: FolderName hat 23 Apps.";
+LABEL_OPTIONS_LABEL = "Label-Optionen:";
+HOMESCREEN = "Home-Bildschirm";
+COUNT_TEXT = "Zähltext:";
+ROWS = "↓ REIHEN PRO SEITE";
+COLUMNS_FOOTER_TEXT = "→ APPS PRO REIHE";
+BUILD_ROOTLESS = "Build: Rootless";
+BUILD_ROOTFUL = "Build: Rootful";
+
+TITLE_SCALE = "TITELSKALIERUNG (%)";
+TITLE_TRANSPARENCY = "TITELTRANSPARENZ (%)";
+TITLE_OFFSET = "TITELVERSATZ [-↑ / +↓]";
+SUBTITLE_SCALE = "UNTERTITELSKALIERUNG (%)";
+SUBTITLE_TRANSPARENCY = "UNTERTITELTRANSPARENZ (%)";
+SUBTITLE_OFFSET = "UNTERTITELVERSATZ [-↑ / +↓]";
+HORIZONTAL_ICON_INSET_FOOTER_TEXT = "Dies kann verwendet werden, um die Breite des Ordners zu reduzieren.";
+HORIZONTAL_ICON_INSET = "HORIZONTALE APP-EINRÜCKUNG";
+TOP_ICON_INSET_FOOTER_TEXT = "Zusätzlicher Abstand von oben.";
+TOP_ICON_INSET = "OBEN APP-EINRÜCKUNG";
+VERTICAL_ICON_SPACING_FOOTER_TEXT = "Vertikaler Abstand der Symbole.";
+VERTICAL_ICON_SPACING = "VERTIKALE APP-EINRÜCKUNG";
+HORIZONTAL_OFFSET_FOOTER_TEXT = "Horizontaler Versatz des Ordners von seinem ursprünglichen Standort.";
+HORIZONTAL_OFFSET = "HORIZONTALER VERSATZ";
+ICON_SCALE = "APPSKALIERUNG (%)";
+HOMESCREEN_ICON_BLUR_FOOTER_TEXT = "Aktiviert: Die Hintergrund-Verschwimmung ist eine verschwommene Version des Home-Bildschirm-Hintergrundbilds.
+
+Deaktiviert: Die Hintergrund-Verschwimmung umfasst Home-Bildschirmsymbole.";
+HOMESCREEN_ICON_BLUR = "Home-Bildschirm-SYMBOL-BLUR";
+HOMESCREEN_BLUR = "Home-Bildschirm-Blur";
+HOMESCREEN_ICON_BLUR_ON_INFO_DESCRIPTION = "Der Hintergrund-Blur ist ein Blur des Home-Bildschirm-Hintergrundbilds.";
+HOMESCREEN_ICON_BLUR_OFF_INFO_DESCRIPTION = "Der Hintergrund-Blur umfasst Home-Bildschirmsymbole.";
+DISMISS_AND_APPLY = "Verwerfen und anwenden";
+
+RESPRING = "Respring";
+RESET_PREFS = "Einstellungen zurücksetzen";
+DEFAULT_APPS = "$c APPS";
+
+RESET_PREFERENCES_QUESTION = "Einstellungen zurücksetzen?";
+RESET_PREFERENCES_DESCRIPTION = "Dies kann nicht rückgängig gemacht werden.";
+
+RESET_RESET = "Zurücksetzen";
+
+CANCEL = "Abbrechen";
+OK = "OK";
+
+SET_SLIDER_VALUE = "Wert des Schiebereglers festlegen";
+MAX_VALUE = "Maximalwert";
+MIN_VALUE = "Minimalwert";

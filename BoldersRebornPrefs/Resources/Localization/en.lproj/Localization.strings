@@ -1,0 +1,49 @@
+LABEL_OPTIONS_FOOTER_TEXT = "Example: $t has $c apps.
+Result: FolderName has 23 apps.";
+LABEL_OPTIONS_LABEL = "Label Options:";
+HOMESCREEN = "Homescreen";
+COUNT_TEXT = "Count Text:";
+ROWS = "↓ ROWS PER PAGE";
+COLUMNS_FOOTER_TEXT = "→ ICONS PER ROW";
+BUILD_ROOTLESS = "Build: Rootless";
+BUILD_ROOTFUL = "Build: Rootful";
+
+TITLE_SCALE = "TITLE SCALE (%)";
+TITLE_TRANSPARENCY = "TITLE TRANSPARENCY (%)";
+TITLE_OFFSET = "TITLE OFFSET [-↑ / +↓]";
+SUBTITLE_SCALE = "SUBTITLE SCALE (%)";
+SUBTITLE_TRANSPARENCY = "SUBTITLE TRANSPARENCY (%)";
+SUBTITLE_OFFSET = "SUBTITLE OFFSET [-↑ / +↓]";
+HORIZONTAL_ICON_INSET_FOOTER_TEXT = "This can be used to squish the sides of your icons closer.";
+HORIZONTAL_ICON_INSET = "HORIZONTAL ICON INSET";
+TOP_ICON_INSET_FOOTER_TEXT = "Extra padding from the top.";
+TOP_ICON_INSET = "TOP ICON INSET";
+VERTICAL_ICON_SPACING_FOOTER_TEXT = "Vertical spacing of the icons.";
+VERTICAL_ICON_SPACING = "VERTICAL ICON INSET";
+HORIZONTAL_OFFSET_FOOTER_TEXT = "Horizontal offset of the folder from its original location.";
+HORIZONTAL_OFFSET = "HORIZONTAL OFFSET";
+ICON_SCALE = "ICON SCALE (%)";
+HOMESCREEN_ICON_BLUR_FOOTER_TEXT = "Enabled: Background blur is a blur of the homescreen wallpaper.
+
+Disabled: Background blur is a includes homescreen icons.";
+HOMESCREEN_ICON_BLUR = "HOMESCREEN ICON BLUR";
+HOMESCREEN_BLUR = "Homescreen Blur";
+HOMESCREEN_ICON_BLUR_ON_INFO_DESCRIPTION = "Background blur is a blur of the homescreen wallpaper.";
+HOMESCREEN_ICON_BLUR_OFF_INFO_DESCRIPTION = "Background blur includes homescreen icons.";
+DISMISS_AND_APPLY = "Dismiss and Apply";
+
+RESPRING = "Respring";
+RESET_PREFS = "Reset Prefs";
+DEFAULT_APPS = "$c APPS";
+
+RESET_PREFERENCES_QUESTION = "Reset Preferences?";
+RESET_PREFERENCES_DESCRIPTION = "This cannot be undone.";
+
+RESET_RESET = "Reset";
+
+CANCEL = "Cancel";
+OK = "OK";
+
+SET_SLIDER_VALUE = "Set Slider Value";
+MAX_VALUE = "Max value";
+MIN_VALUE = "Min value";

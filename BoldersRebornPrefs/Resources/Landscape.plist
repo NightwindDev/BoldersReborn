@@ -1,0 +1,298 @@
+<!--
+/*
+|==================================================================|
+| Landscape Preferences                                            |
+| - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  |
+| The original Bolders had landscape as well.                      |
+| However, since landscape is pretty much broken on iOS 14 and 15, |
+| Landscape support is not planned at the moment.                  |
+|==================================================================|
+*/
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>TITLE SCALE (%)</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<string>1</string>
+			<key>defaults</key>
+			<string>com.nightwind.boldersrebornprefs</string>
+			<key>key</key>
+			<string>titleScale_landscape</string>
+			<key>max</key>
+			<string>1.5</string>
+			<key>min</key>
+			<string>0.5</string>
+			<key>showValue</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>TITLE TRANSPARENCY (%)</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<string>1</string>
+			<key>defaults</key>
+			<string>com.nightwind.boldersrebornprefs</string>
+			<key>key</key>
+			<string>titleTransparency_landscape</string>
+			<key>max</key>
+			<string>1</string>
+			<key>min</key>
+			<string>0</string>
+			<key>showValue</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>TITLE OFFSET [-↑ / +↓]</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<string>0</string>
+			<key>defaults</key>
+			<string>com.nightwind.boldersrebornprefs</string>
+			<key>key</key>
+			<string>titleOffset_landscape</string>
+			<key>max</key>
+			<string>250</string>
+			<key>min</key>
+			<string>-250</string>
+			<key>showValue</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>SUBTITLE SCALE (%)</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<string>1</string>
+			<key>defaults</key>
+			<string>com.nightwind.boldersrebornprefs</string>
+			<key>key</key>
+			<string>subtitleScale_landscape</string>
+			<key>max</key>
+			<string>1.5</string>
+			<key>min</key>
+			<string>0.5</string>
+			<key>showValue</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>SUBTITLE TRANSPARENCY (%)</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<string>0.5</string>
+			<key>defaults</key>
+			<string>com.nightwind.boldersrebornprefs</string>
+			<key>key</key>
+			<string>subtitleTransparency_landscape</string>
+			<key>max</key>
+			<string>1</string>
+			<key>min</key>
+			<string>0</string>
+			<key>showValue</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>SUBTITLE OFFSET [-↑ / +↓]</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<string>0</string>
+			<key>defaults</key>
+			<string>com.nightwind.boldersrebornprefs</string>
+			<key>key</key>
+			<string>subtitleOffset_landscape</string>
+			<key>max</key>
+			<string>125</string>
+			<key>min</key>
+			<string>-125</string>
+			<key>showValue</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>This can be used to squish the sides of your icons closer.</string>
+			<key>label</key>
+			<string>HORIZONTAL ICON INSET</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<string>0</string>
+			<key>defaults</key>
+			<string>com.nightwind.boldersrebornprefs</string>
+			<key>key</key>
+			<string>horizontalIconInset_landscape</string>
+			<key>max</key>
+			<string>25</string>
+			<key>min</key>
+			<string>-25</string>
+			<key>showValue</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Extra padding from the top.</string>
+			<key>label</key>
+			<string>TOP ICON INSET</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<string>0</string>
+			<key>defaults</key>
+			<string>com.nightwind.boldersrebornprefs</string>
+			<key>key</key>
+			<string>topIconInset_landscape</string>
+			<key>max</key>
+			<string>25</string>
+			<key>min</key>
+			<string>-25</string>
+			<key>showValue</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Horizontal offset of the folder from its original location.</string>
+			<key>label</key>
+			<string>HORIZONTAL OFFSET</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<string>0</string>
+			<key>defaults</key>
+			<string>com.nightwind.boldersrebornprefs</string>
+			<key>key</key>
+			<string>horizontalOffset_landscape</string>
+			<key>max</key>
+			<string>300</string>
+			<key>min</key>
+			<string>-300</string>
+			<key>showValue</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Vertical spacing of the icons.</string>
+			<key>label</key>
+			<string>VERTICAL ICON SPACING</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<string>50</string>
+			<key>defaults</key>
+			<string>com.nightwind.boldersrebornprefs</string>
+			<key>key</key>
+			<string>verticalIconSpacing_landscape</string>
+			<key>max</key>
+			<string>350</string>
+			<key>min</key>
+			<string>50</string>
+			<key>showValue</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>ICON SCALE (%)</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>cellClass</key>
+			<string>BoldersRebornSliderCell</string>
+			<key>default</key>
+			<string>1</string>
+			<key>defaults</key>
+			<string>com.nightwind.boldersrebornprefs</string>
+			<key>key</key>
+			<string>iconScale_landscape</string>
+			<key>max</key>
+			<string>2</string>
+			<key>min</key>
+			<string>0.5</string>
+			<key>showValue</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Enabled: Background blur includes homescreen icons
+
+Disabled: Background blur is a blur of the homescreen wallpaper
+			</string>
+			<key>label</key>
+			<string>HOMESCREEN ICON BLUR</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<string>1</string>
+			<key>defaults</key>
+			<string>com.nightwind.boldersrebornprefs</string>
+			<key>key</key>
+			<string>homescreenIconBlur_portrait</string>
+			<key>label</key>
+			<string>Homescreen Icon Blur</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>Landscape</string>
+</dict>
+</plist>-->

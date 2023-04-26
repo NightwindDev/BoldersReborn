@@ -1,0 +1,49 @@
+LABEL_OPTIONS_FOOTER_TEXT = "Пример: $t имеет $c приложений.
+Результат: Имя папки имеет 23 приложений.";
+LABEL_OPTIONS_LABEL = "Опции метки:";
+HOMESCREEN = "Экран «Домой»";
+COUNT_TEXT = "Счетный Текст:";
+ROWS = "↓ СТРОК НА СТРАНИЦЕ";
+COLUMNS_FOOTER_TEXT = "→ ИКОНОК В СТРОКЕ";
+BUILD_ROOTLESS = "Сборка: Без root";
+BUILD_ROOTFUL = "Сборка: С root";
+
+TITLE_SCALE = "МАСШТАБ ЗАГОЛОВКА (%)";
+TITLE_TRANSPARENCY = "ПРОЗРАЧНОСТЬ ЗАГОЛОВКА (%)";
+TITLE_OFFSET = "СМЕЩЕНИЕ ЗАГОЛОВКА [-↑ / +↓]";
+SUBTITLE_SCALE = "МАСШТАБ ПОДЗАГОЛОВКА (%)";
+SUBTITLE_TRANSPARENCY = "ПРОЗРАЧНОСТЬ ПОДЗАГОЛОВКА (%)";
+SUBTITLE_OFFSET = "СМЕЩЕНИЕ ПОДЗАГОЛОВКА [-↑ / +↓]";
+HORIZONTAL_ICON_INSET_FOOTER_TEXT = "Может быть использовано для сжатия сторон ваших иконок ближе друг к другу.";
+HORIZONTAL_ICON_INSET = "ГОРИЗОНТАЛЬНАЯ ВСТАВКА ИКОНОК";
+TOP_ICON_INSET_FOOTER_TEXT = "Дополнительный отступ сверху.";
+TOP_ICON_INSET = "ВЕРХНЯЯ ВСТАВКА ИКОНОК";
+VERTICAL_ICON_SPACING_FOOTER_TEXT = "Вертикальный интервал между иконками.";
+VERTICAL_ICON_SPACING = "ВЕРТИКАЛЬНЫЙ ИНТЕРВАЛ ИКОНОК";
+HORIZONTAL_OFFSET_FOOTER_TEXT = "Горизонтальное смещение папки от исходного положения.";
+HORIZONTAL_OFFSET = "ГОРИЗОНТАЛЬНОЕ СМЕЩЕНИЕ";
+ICON_SCALE = "МАСШТАБ ИКОНОК (%)";
+HOMESCREEN_ICON_BLUR_FOOTER_TEXT = "Включён: размытие фона - это размытие обоев Экрана «Домой».
+
+Отключён: размытие фона включает иконки на Экране «Домой».";
+HOMESCREEN_ICON_BLUR = "РАЗМЫТИЕ ИКОНОК НА ЭКРАНЕ «ДОМОЙ»";
+HOMESCREEN_BLUR = "Размытие Экрана «Домой»";
+HOMESCREEN_ICON_BLUR_ON_INFO_DESCRIPTION = "Размытие фона - это размытие обоев Экрана «Домой».";
+HOMESCREEN_ICON_BLUR_OFF_INFO_DESCRIPTION = "Размытие фона включает иконки на Экране «Домой».";
+DISMISS_AND_APPLY = "Закрыть и Применить";
+
+RESPRING = "Респринг";
+RESET_PREFS = "Сброс Настроек";
+DEFAULT_APPS = "$c ПРИЛОЖЕНИЙ";
+
+RESET_PREFERENCES_QUESTION = "Сбросить настройки?";
+RESET_PREFERENCES_DESCRIPTION = "Это невозможно отменить.";
+
+RESET_RESET = "Сбросить";
+
+CANCEL = "Отменить";
+OK = "OK";
+
+SET_SLIDER_VALUE = "Установка значения ползунка";
+MAX_VALUE = "Макс.";
+MIN_VALUE = "Мин.";

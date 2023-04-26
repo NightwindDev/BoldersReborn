@@ -1,0 +1,49 @@
+LABEL_OPTIONS_FOOTER_TEXT = "举例: $t 有 $c 个应用程序.
+结果: FolderName 有 23 个应用程序.";
+LABEL_OPTIONS_LABEL = "标签选项:";
+HOMESCREEN = "主屏幕";
+COUNT_TEXT = "计数文本:";
+ROWS = "↓ 每页行数";
+COLUMNS_FOOTER_TEXT = "→ 每行图标数";
+BUILD_ROOTLESS = "构建: 无根";
+BUILD_ROOTFUL = "构建: 有根";
+
+TITLE_SCALE = "标题比例 (%)";
+TITLE_TRANSPARENCY = "标题透明度 (%)";
+TITLE_OFFSET = "标题偏移 [-↑ / +↓]";
+SUBTITLE_SCALE = "副标题比例 (%)";
+SUBTITLE_TRANSPARENCY = "副标题透明度 (%)";
+SUBTITLE_OFFSET = "副标题比例 [-↑ / +↓]";
+HORIZONTAL_ICON_INSET_FOOTER_TEXT = "这可以用来挤压图标的侧面.";
+HORIZONTAL_ICON_INSET = "水平图标插图";
+TOP_ICON_INSET_FOOTER_TEXT = "从顶部到额外的填充.";
+TOP_ICON_INSET = "顶部图标插图";
+VERTICAL_ICON_SPACING_FOOTER_TEXT = "图标的垂直间距.";
+VERTICAL_ICON_SPACING = "垂直图标插图";
+HORIZONTAL_OFFSET_FOOTER_TEXT = "文件夹与原始位置的水平偏移量.";
+HORIZONTAL_OFFSET = "水平偏移";
+ICON_SCALE = "图标比例 (%)";
+HOMESCREEN_ICON_BLUR_FOOTER_TEXT = "打开: 背景模糊是主屏幕壁纸的模糊.
+
+关闭: 背景模糊包含主屏幕图标.";
+HOMESCREEN_ICON_BLUR = "主屏幕图标模糊";
+HOMESCREEN_BLUR = "主屏幕模糊";
+HOMESCREEN_ICON_BLUR_ON_INFO_DESCRIPTION = "背景模糊是主屏幕壁纸的模糊.";
+HOMESCREEN_ICON_BLUR_OFF_INFO_DESCRIPTION = "背景模糊包含主屏幕图标.";
+DISMISS_AND_APPLY = "取消 和 应用";
+
+RESPRING = "注销";
+RESET_PREFS = "恢复默认设置";
+DEFAULT_APPS = "$c 应用程序";
+
+RESET_PREFERENCES_QUESTION = "重置首选项问题";
+RESET_PREFERENCES_DESCRIPTION = "重置首选项描述.";
+
+RESET_RESET = "重新设置";
+
+CANCEL = "取消";
+OK = "确定";
+
+SET_SLIDER_VALUE = "设置滑块值";
+MAX_VALUE = "最大值";
+MIN_VALUE = "最小值";

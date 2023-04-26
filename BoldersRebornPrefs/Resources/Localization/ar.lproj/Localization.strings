@@ -1,0 +1,49 @@
+LABEL_OPTIONS_FOOTER_TEXT = "مثال: $t يحتوي على $c تطبيقات
+النتيجة: المجلد يحتوي على ١٠ تطبيقات";
+LABEL_OPTIONS_LABEL = "إعدادات العنوان";
+HOMESCREEN = "الشاشة الرئيسية";
+COUNT_TEXT = "عدد الأيقونات:";
+ROWS = "↓ المصفوفات في الصفحة";
+COLUMNS_FOOTER_TEXT = "→ الأيقونات في الصف";
+BUILD_ROOTLESS = "نسخة: Rootless";
+BUILD_ROOTFUL = "نسخة: Rootful";
+
+TITLE_SCALE = "حجم العنوان (%)";
+TITLE_TRANSPARENCY = "شفافية العنوان (%)";
+TITLE_OFFSET = "فراغ العنون الرئيسي [-↑ / +↓]";
+SUBTITLE_SCALE = "حجم العنوان الفرعي (%)";
+SUBTITLE_TRANSPARENCY = "شفافية العنوان الفرعي (%)";
+SUBTITLE_OFFSET = "فراغ العنوان الفرعي [-↑ / +↓]";
+HORIZONTAL_ICON_INSET_FOOTER_TEXT = "يمكن إستخدامه لجعل الأيقونات متقاربين.";
+HORIZONTAL_ICON_INSET = "فراغ الأيقونات الأُفقي";
+TOP_ICON_INSET_FOOTER_TEXT = "فراغ إضافي من الأعلى.";
+TOP_ICON_INSET = "الفراغ للأيقونات العلوية";
+VERTICAL_ICON_SPACING_FOOTER_TEXT = "الفراغ الرأسي للأيقونات.";
+VERTICAL_ICON_SPACING = "فراغ الأيقونات الرأسي";
+HORIZONTAL_OFFSET_FOOTER_TEXT = "الفراغ الأُفقي للمجلدات من موقعها الرئيسي.";
+HORIZONTAL_OFFSET = "الفراغ الأُفقي";
+ICON_SCALE = "حجم الأيقونات (%)";
+HOMESCREEN_ICON_BLUR_FOOTER_TEXT = "مفعل: شفافية الخلفية هي شفافية خلفية الشاشة الرئيسية.
+
+مطفئ: شفافية الخلفية تحتوي على أيقونات الشاشة الرئيسية";
+HOMESCREEN_ICON_BLUR = "ضبابية أيقونة الشاشة الرئيسية";
+HOMESCREEN_BLUR = "ضبابية الشاشة الرئيسية";
+HOMESCREEN_ICON_BLUR_OFF_INFO_DESCRIPTION = "ضبابية الخلفية تتضمن أيقونات الشاشة الرئيسية.";
+HOMESCREEN_ICON_BLUR_ON_INFO_DESCRIPTION = "ضبابية الخلفية هي ضبابية خلفية الشاشة الرئيسية.";
+DISMISS_AND_APPLY = "ألغِ و طبِق";
+
+RESET_PREFS = "اعادة ضبط الاعدادات";
+RESPRING = "اعادة التشغيل";
+DEFAULT_APPS = "$c تطبيقات";
+
+RESET_PREFERENCES_QUESTION = "إعادة تعيين الإعدادات؟";
+RESET_PREFERENCES_DESCRIPTION = "لا يمكن التراجع عن هذا.";
+
+RESET_RESET = "إعادة تعيين";
+
+CANCEL = "إلغاء";
+OK = "حسناً";
+
+SET_SLIDER_VALUE = "تعيين قيمة المنزلق";
+MAX_VALUE = "الحد الأقصى للقيمة";
+MIN_VALUE = "الحد الأدنى للقيمة";

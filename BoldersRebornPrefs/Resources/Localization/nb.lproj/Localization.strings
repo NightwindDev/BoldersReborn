@@ -1,0 +1,49 @@
+LABEL_OPTIONS_FOOTER_TEXT = "Eksempel: $t har $c apper
+Resultat: mappenavn har 23 apper.";
+LABEL_OPTIONS_LABEL = "Etikett alternativer";
+HOMESCREEN = "Hjemskjerm";
+COUNT_TEXT = "Telle teksten:";
+ROWS = "↓ RADER PER SIDE";
+COLUMNS_FOOTER_TEXT = "→ IKONER PER RAD";
+BUILD_ROOTLESS = "Bygg: rotløs";
+BUILD_ROOTFUL = "Bygg: rotfull";
+
+TITLE_SCALE = "Tittelskala  (%)";
+TITLE_TRANSPARENCY = "Tittel transparens (%)";
+TITLE_OFFSET = "Tittelforskyvning [-↑ / +↓]";
+SUBTITLE_SCALE = "Tekst skala (%)";
+SUBTITLE_TRANSPARENCY = "Tekst transparens (%)";
+SUBTITLE_OFFSET = "Tekstforskyvning [-↑ / +↓]";
+HORIZONTAL_ICON_INSET_FOOTER_TEXT = "Dette kan bli brukt til å skvise sidene av ikonene dine nærmere hverandre.";
+HORIZONTAL_ICON_INSET = "Horisontalt ikoninnfelt";
+TOP_ICON_INSET_FOOTER_TEXT = "Ekstra polstring fra toppen.";
+TOP_ICON_INSET = "Topp ikon innsett";
+VERTICAL_ICON_SPACING_FOOTER_TEXT = "Vertikal avstand mellom ikonene.";
+VERTICAL_ICON_SPACING = "Vertikal ikoninnfelt";
+HORIZONTAL_OFFSET_FOOTER_TEXT = "Horisontal forskyvning av mappens opprinnelige lokasjon.";
+HORIZONTAL_OFFSET = "Horisontalt forskyvning";
+ICON_SCALE = "Ikon Skala (%)";
+HOMESCREEN_ICON_BLUR_FOOTER_TEXT = "Aktivert: Bakgrunnsuskarphet av skarpheten av hjemskjerm bakgrunnsbilde.
+
+Deaktivert: Bakgrunnsuskarphet inkluderer hjemskjerm ikoner.";
+HOMESCREEN_ICON_BLUR = "Hjemskjerm ikon skarphet";
+HOMESCREEN_BLUR = "Hjemskjerm Skarphet";
+HOMESCREEN_ICON_BLUR_ON_INFO_DESCRIPTION = "Bakgrunnsuskarphet er skarphet av hjemskjem bakgrunnsbilde.";
+HOMESCREEN_ICON_BLUR_OFF_INFO_DESCRIPTION = "Bakgrunnsuskarphet inkluderer hjemskjerm ikoner.";
+DISMISS_AND_APPLY = "Ignorer og Bruk";
+
+RESPRING = "Respring";
+RESET_PREFS = "Reset Preferanser";
+DEFAULT_APPS = "$c APPER";
+
+RESET_PREFERENCES_QUESTION = "Reset preferanser?";
+RESET_PREFERENCES_DESCRIPTION = "Dette kan ikke angres.";
+
+RESET_RESET = "Reset";
+
+CANCEL = "Kansaler";
+OK = "OK";
+
+SET_SLIDER_VALUE = "Sett glidebryterverdi";
+MAX_VALUE = "Maks verdi";
+MIN_VALUE = "Min verdi";

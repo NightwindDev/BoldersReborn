@@ -1,0 +1,49 @@
+LABEL_OPTIONS_FOOTER_TEXT = "Exemple: $t a $c applis.
+Résultat: Dossier a 23 applis.";
+LABEL_OPTIONS_LABEL = "Option d'étiquetage:";
+HOMESCREEN = "Écran d'accueil";
+COUNT_TEXT = "Compteur d'applis:";
+ROWS = "↓ LIGNES PAR PAGES";
+COLUMNS_FOOTER_TEXT = "→ ICONES PAR PAGES";
+BUILD_ROOTLESS = "Build: Rootless";
+BUILD_ROOTFUL = "Build: Rootful";
+
+TITLE_SCALE = "Échelle du titre (%)";
+TITLE_TRANSPARENCY = "Transparance du titre (%)";
+TITLE_OFFSET = "Compensation du titre [-↑ / +↓]";
+SUBTITLE_SCALE = "Échelle du sous-titre (%)";
+SUBTITLE_TRANSPARENCY = "Transparence du sous-titre (%)";
+SUBTITLE_OFFSET = "Comensation du sous-titre [-↑ / +↓]";
+HORIZONTAL_ICON_INSET_FOOTER_TEXT = "Cette option peut être utilisée pour rapprocher les côtés de vos icônes.";
+HORIZONTAL_ICON_INSET = "Inserion d'une icône horizontale";
+TOP_ICON_INSET_FOOTER_TEXT = "Rembourrage supplémentaire à partir du haut.";
+TOP_ICON_INSET = "Insertion d'une icône supérieur";
+VERTICAL_ICON_SPACING_FOOTER_TEXT = "Espacement vertical des icônes.";
+VERTICAL_ICON_SPACING = "Insertion d'une icône verticale";
+HORIZONTAL_OFFSET_FOOTER_TEXT = "Décalage horizontal du dossier par rapport à son emplacement d'origine.";
+HORIZONTAL_OFFSET = "Décalage horizontal";
+ICON_SCALE = "Échelle de l'icône (%)";
+HOMESCREEN_ICON_BLUR_FOOTER_TEXT = "Activé :  Désactive l'affichage d'icônes de l'écran d'accueil lors de l'ouverture d'un dossier.
+
+Désactive : Active l'affichage d'icônes de l'écran d'accueil lors de l'ouverture d'un dossier";
+HOMESCREEN_ICON_BLUR = "Icones de l'écran d'accueil floues";
+HOMESCREEN_BLUR = "Flou de l'écran d'accueil";
+HOMESCREEN_ICON_BLUR_ON_INFO_DESCRIPTION = "Le dossier n'a pas d'icônes d'écran d'accueil lorsqu'il est ouvert.";
+HOMESCREEN_ICON_BLUR_OFF_INFO_DESCRIPTION = "Le flou d'arrière-plan inclut les icônes de l'écran d'accueil.";
+DISMISS_AND_APPLY = "Rejeter et appliquer";
+
+RESPRING = "Relancer le SpringBoard";
+RESET_PREFS = "Réinitialiser les préférences";
+DEFAULT_APPS = "$c APPLIS";
+
+RESET_PREFERENCES_QUESTION = "Réinitialiser les préférences ?";
+RESET_PREFERENCES_DESCRIPTION = "Cette action ne peut pas être révoqué. Voulez-vous vraiment réinitialiser les préférences ?";
+
+RESET_RESET = "Réintialliser";
+
+CANCEL = "Annuler";
+OK = "OK";
+
+SET_SLIDER_VALUE = "Définir la valeur du curseur";
+MAX_VALUE = "Valeur maximale ";
+MIN_VALUE = "Valeur minimale ";
