@@ -10,7 +10,6 @@ Here are the patches that I've figured out needed to be on iOS 13 in order for t
 
 ---
 ## FYI:
----
 - The way I used to check if the tweak is running on a device on iOS 13 is `UIDevice.currentDevice.systemVersion.floatValue < 14.0`. It will be referred to as the `Comparison Check` in this in order to shorten the descriptions.
 
 - The way I used to check if the tweak is running on a device on iOS 14 or higher is `if (@available(iOS 14, *))`. It will be referred to as the `Available Check` in this in order to shorten the descriptions.
@@ -51,7 +50,6 @@ Here are the patches that I've figured out needed to be on iOS 13 in order for t
 
 ---
 ## Regarding Landscape Support
----
 I was also going to have landscape support be added to the tweak. However, since barely anyone uses their homescreen in landscape mode, and since it is somewhat broken on recent iOS versions, I decided against it. However, I have left the keys for it if you would like to update it. Additionally, I also left the plist file for landscape so that the it wouldn't have to be re-created.
 
 Essentially, lots of things will have to be doubled down inside of the hooks in order to support both portrait *and* landscape.
