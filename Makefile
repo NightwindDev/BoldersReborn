@@ -1,11 +1,8 @@
 export SYSROOT = $(THEOS)/sdks/iPhoneOS14.4.sdk/
-export TARGET := iphone:clang:latest:13.0
+export TARGET := iphone:clang:latest:14.0
 export ARCHS = arm64 arm64e
-# export TARGET = simulator:clang::13.0
-# export ARCHS = arm64
-# export SYSROOT = $(THEOS)/sdks/iPhoneSimulator14.5.sdk/
 
-export FINAL = 0;
+export FINAL = 1
 
 INSTALL_TARGET_PROCESSES = SpringBoard
 

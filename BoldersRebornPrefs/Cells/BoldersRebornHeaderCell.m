@@ -6,13 +6,9 @@ NSCache *versionCache = nil;
 #define kTintColor [UIColor colorWithRed:0.86 green:0.26 blue:0.31 alpha:1.0]
 
 NSString *getVersion() {
-    int isFinal = FINAL; // needed because of the way the macro works
-
-    if (isFinal == 0) {
+    if (FINAL == 0) {
         return @"Release Candidate X";
-    }
-
-    return PACKAGE_VERSION;
+    } else return PACKAGE_VERSION;
 }
 
 @implementation BoldersRebornHeaderCell

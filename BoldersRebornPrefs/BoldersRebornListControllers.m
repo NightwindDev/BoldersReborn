@@ -133,7 +133,7 @@ NSString *localizedCountString(NSUInteger count) {
 																	cell:PSGroupCell
 																	edit:nil];
 
-			[specifier setProperty:strcmp(THEOS_PACKAGE_INSTALL_PREFIX, "/var/jb") == 0 ? @"BUILD_ROOTLESS" : @"BUILD_ROOTFUL" forKey:@"footerText"];
+			[specifier setProperty:strcmp(THEOS_PACKAGE_INSTALL_PREFIX, "/var/jb") == 0 ? [dict objectForKey:@"BUILD_ROOTLESS"] : [dict objectForKey:@"BUILD_ROOTFUL"] forKey:@"footerText"];
 			[specifier setProperty:@1 forKey:@"footerAlignment"];
 
 
