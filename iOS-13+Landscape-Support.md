@@ -42,7 +42,7 @@ Here are the patches that I've figured out needed to be on iOS 13 in order for t
 - `gearshape.fill` as an SFSymbol does not exist on iOS 13, so either an alternative one would have to be used, or some other solution. This can be done using a __comparison check__.
 ---
 ### BoldersRebornSliderCell.**mm**
----t
+---
 #### `BoldersRebornSliderCell` • `-(void)layoutSubviews`
 - The fix provided for the weird cutoff on `PSSliderCell`s is not available on iOS 13; it crashes the Settings app when trying to go to the page.
 
