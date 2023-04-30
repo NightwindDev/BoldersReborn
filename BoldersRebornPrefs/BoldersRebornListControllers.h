@@ -3,7 +3,6 @@
 #import <Preferences/PSTableCell.h>
 #import <Preferences/PSSwitchTableCell.h>
 #import <Preferences/PSSliderTableCell.h>
-#import <LocalAuthentication/LocalAuthentication.h>
 #import <substrate.h>
 #import <spawn.h>
 #import "rootless.h"
