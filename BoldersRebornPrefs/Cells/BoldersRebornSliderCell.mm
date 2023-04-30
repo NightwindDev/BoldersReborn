@@ -3,7 +3,7 @@
 #import "BoldersRebornSliderCell.h"
 
 NSString *stringFromFloatRoundedToDecimalPlaces(NSUInteger decimalPlaces, float floatValue) {
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    NSNumberFormatter *formatter = [NSNumberFormatter new];
     formatter.numberStyle = NSNumberFormatterDecimalStyle;
     formatter.maximumFractionDigits = decimalPlaces;
     formatter.roundingMode = NSNumberFormatterRoundUp;

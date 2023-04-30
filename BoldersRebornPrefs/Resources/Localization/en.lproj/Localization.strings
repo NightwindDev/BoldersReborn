@@ -19,13 +19,13 @@ HORIZONTAL_ICON_INSET = "HORIZONTAL ICON INSET";
 TOP_ICON_INSET_FOOTER_TEXT = "Extra padding from the top.";
 TOP_ICON_INSET = "TOP ICON INSET";
 VERTICAL_ICON_SPACING_FOOTER_TEXT = "Vertical spacing of the icons.";
-VERTICAL_ICON_SPACING = "VERTICAL ICON INSET";
+VERTICAL_ICON_SPACING = "VERTICAL ICON SPACING";
 HORIZONTAL_OFFSET_FOOTER_TEXT = "Horizontal offset of the folder from its original location.";
 HORIZONTAL_OFFSET = "HORIZONTAL OFFSET";
 ICON_SCALE = "ICON SCALE (%)";
 HOMESCREEN_ICON_BLUR_FOOTER_TEXT = "Enabled: Background blur is a blur of the homescreen wallpaper.
 
-Disabled: Background blur is a includes homescreen icons.";
+Disabled: Background blur includes homescreen icons.";
 HOMESCREEN_ICON_BLUR = "HOMESCREEN ICON BLUR";
 HOMESCREEN_BLUR = "Homescreen Blur";
 HOMESCREEN_ICON_BLUR_ON_INFO_DESCRIPTION = "Background blur is a blur of the homescreen wallpaper.";

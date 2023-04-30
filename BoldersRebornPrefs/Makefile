@@ -2,7 +2,7 @@ include $(THEOS)/makefiles/common.mk
 
 BUNDLE_NAME = BoldersRebornPrefs
 
-$(BUNDLE_NAME)_FILES = BoldersRebornListControllers.m $(wildcard Cells/*.m) $(wildcard Cells/*.mm)
+$(BUNDLE_NAME)_FILES = BoldersRebornListControllers.mm $(wildcard Cells/*.m) $(wildcard Cells/*.mm)
 $(BUNDLE_NAME)_FRAMEWORKS = UIKit
 $(BUNDLE_NAME)_PRIVATE_FRAMEWORKS = Preferences
 $(BUNDLE_NAME)_INSTALL_PATH = /Library/PreferenceBundles

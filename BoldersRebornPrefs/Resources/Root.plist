@@ -16,7 +16,7 @@
 			<string>Bolders Reborn</string>
 
 			<key>height</key>
-			<real>225</real>
+			<real>215</real>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -90,6 +90,8 @@
 			<string>countText</string>
 			<key>label</key>
 			<string>COUNT_TEXT</string>
+			<key>noAutoCorrect</key>
+			<string>1</string>
 		</dict>
 		<dict>
 			<key>cell</key>

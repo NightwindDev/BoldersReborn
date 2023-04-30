@@ -41,7 +41,7 @@
         handleLabel = [UILabel new];
         handleLabel.text = self.handle;
         handleLabel.textColor = UIColor.secondaryLabelColor;
-        handleLabel.font = [UIFont systemFontOfSize:13];
+        handleLabel.font = [UIFont systemFontOfSize:11];
         handleLabel.translatesAutoresizingMaskIntoConstraints = false;
         [self addSubview:handleLabel];
 

@@ -1,8 +1,11 @@
-/* Copyright (c) 2023 Nightwind. All rights reserved.
+/*
+ *
+ * Copyright (c) 2023 Nightwind. All rights reserved.
  *
  * A portion of this code is derived from Atria, which is
  * licensed under the GPLv3 license. The original code can be found at
  * https://github.com/ren7995/Atria/blob/17cf2dde27e2e13e7bcd49f497d3d4630b5749c3/Hooks/Layout.xm#L297.
+ *
  */
 
 #import "Tweak.h"
@@ -46,10 +49,22 @@ NSString *localizedCountString(NSUInteger count) {
 
 %hook SBFloatyFolderView
 
+// Getting rid of the original corner radius for the background
+-(double)cornerRadius {
+	return 0;
+}
+
 // This determines the spacing and positioning of everything
 - (CGRect)_frameForScalingView {
 	CGRect frame = %orig;
-	return CGRectMake(frame.origin.x - 36 + horizontalIconInset_portrait + horizontalOffset_portrait,
+
+	CGFloat offset = 0;
+
+	if (@available(iOS 15, *)) {
+		offset = -36;
+	}
+
+	return CGRectMake(frame.origin.x + offset + horizontalIconInset_portrait + horizontalOffset_portrait,
 					  frame.origin.y + topIconInset_portrait,
 					  UIScreen.mainScreen.bounds.size.width - 18 - (horizontalIconInset_portrait * 2),
 					  frame.size.height + verticalIconSpacing_portrait);
@@ -77,8 +92,10 @@ NSString *localizedCountString(NSUInteger count) {
 // Actual implementation for closing the foldr, essentially simulating the press of the home button
 %new
 - (void)tapped {
-	SpringBoard *sb = (SpringBoard *)[%c(SpringBoard) sharedApplication];
-	[sb _simulateHomeButtonPressWithCompletion:nil];
+	if (MSHookIvar<BOOL>(self, "_isEditing") == false) {
+		SpringBoard *sb = (SpringBoard *)[%c(SpringBoard) sharedApplication];
+		[sb _simulateHomeButtonPressWithCompletion:nil];
+	}
 }
 
 
@@ -178,6 +195,12 @@ NSString *localizedCountString(NSUInteger count) {
 	if ([self.superview isKindOfClass:%c(SBFloatyFolderScrollView)]) {
 		self.layout.layoutConfiguration.isOldFolder = true;
 		self.layout.layoutConfiguration.check = false;
+
+		for (SBIconView *icon in self.subviews) {
+			icon.iconContentScale = iconScale_portrait;
+
+			// [icon _updateIconContentScale];
+		}
 	}
 }
 
@@ -188,6 +211,12 @@ NSString *localizedCountString(NSUInteger count) {
 	if ([self.superview isKindOfClass:%c(SBFloatyFolderScrollView)]) {
 		self.layout.layoutConfiguration.isOldFolder = true;
 		self.layout.layoutConfiguration.check = false;
+
+		for (SBIconView *icon in self.subviews) {
+			icon.iconContentScale = iconScale_portrait;
+
+			[icon _updateIconContentScale];
+		}
 	}
 }
 
@@ -215,6 +244,45 @@ NSString *localizedCountString(NSUInteger count) {
 	}
 
 	return origLayout;
+}
+
+// Applies the proper icon scale to the icons in the folder
+-(void)layoutIconsIfNeeded:(CGFloat)arg0 {
+	%orig;
+
+	if ([self.superview isKindOfClass:%c(SBFloatyFolderScrollView)]) {
+		for (SBIconView *icon in self.subviews) {
+			icon.iconContentScale = iconScale_portrait;
+
+			[icon _updateIconContentScale];
+		}
+	}
+}
+
+// Applies the proper icon scale to the icons in the folder
+- (void)layoutIconsIfNeeded:(CGFloat)arg0 animationType:(NSInteger)arg1 options:(NSUInteger)arg2 {
+	%orig;
+
+	if ([self.superview isKindOfClass:%c(SBFloatyFolderScrollView)]) {
+		for (SBIconView *icon in self.subviews) {
+			icon.iconContentScale = iconScale_portrait;
+
+			[icon _updateIconContentScale];
+		}
+	}
+}
+
+// Applies the proper icon scale to the icons in the folder
+- (void)layoutIconsIfNeededUsingAnimator:(id)arg0 options:(NSUInteger)arg1 {
+	%orig;
+
+	if ([self.superview isKindOfClass:%c(SBFloatyFolderScrollView)]) {
+		for (SBIconView *icon in self.subviews) {
+			icon.iconContentScale = iconScale_portrait;
+
+			[icon _updateIconContentScale];
+		}
+	}
 }
 
 %end
@@ -463,6 +531,13 @@ NSString *localizedCountString(NSUInteger count) {
 			%orig(true);
 		}
 	} else %orig;
+}
+
+- (void)_updateIconContentScale {
+	%orig;
+	if (kIsInFolder) {
+		self.iconContentScale = iconScale_portrait;
+	}
 }
 
 %end

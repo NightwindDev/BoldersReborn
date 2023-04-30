@@ -202,10 +202,21 @@ NSString *localizedCountString(NSUInteger count) {
 	self.navigationItem.rightBarButtonItem = topMenuButtonItem;
 }
 
-- (void)viewDidLoad {
-	[super viewDidLoad];
+- (instancetype)init {
+    self = [super init];
 
-	[self initTopMenu];
+    if (self) {
+		[self initTopMenu];
+
+		NSUserDefaults *userDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"com.nightwind.boldersrebornprefs"];
+
+		if (![userDefaults objectForKey:@"tweakEnabled"]) {
+			[userDefaults setObject:@(true) forKey:@"tweakEnabled"];
+			[userDefaults synchronize];
+		}
+    }
+
+    return self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -220,6 +231,18 @@ NSString *localizedCountString(NSUInteger count) {
 
 	self.navigationController.navigationBar.tintColor = UIColor.systemBlueColor;
 	self.navigationController.navigationController.navigationBar.tintColor = UIColor.systemBlueColor;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc]
+                initWithTarget:self action:@selector(handleSingleTap:)];
+    tapper.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapper];
+}
+
+- (void)handleSingleTap:(UITapGestureRecognizer *) sender {
+    [self.view endEditing:YES];
 }
 
 - (PSTableCell *)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
@@ -315,10 +338,14 @@ NSString *localizedCountString(NSUInteger count) {
 	return cell;
 }
 
-- (void)viewDidLoad {
-	[super viewDidLoad];
+- (instancetype)init {
+    self = [super init];
 
-	[self initTopMenu];
+    if (self) {
+		[self initTopMenu];
+    }
+
+    return self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -345,9 +372,36 @@ NSString *localizedCountString(NSUInteger count) {
 
 	BOOL isOn = ((UISwitch *)(self.caller.control)).isOn;
 
-	self.view.backgroundColor = UIColor.systemBackgroundColor;
+	self.view.backgroundColor = UIColor.blackColor;
 
-	_imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:(isOn ? @"no_icon_blur.png" : @"icon_blur.png") inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil]];
+	UIImage *image;
+
+	NSArray *windows = UIApplication.sharedApplication.windows;
+	UIWindow *mainWindow = nil;
+	for (UIWindow *window in windows) {
+		if (window.isKeyWindow) {
+			mainWindow = window;
+			break;
+		}
+	}
+
+	UIEdgeInsets safeAreaInsets = mainWindow.safeAreaInsets;
+
+	if (safeAreaInsets.top > 0) {
+		if (isOn) {
+			image = [UIImage imageNamed:@"notched_no_icon_blur.png" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
+		} else {
+			image = [UIImage imageNamed:@"notched_icon_blur.png" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
+		}
+	} else {
+		if (isOn) {
+			image = [UIImage imageNamed:@"legacy_no_icon_blur.jpg" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
+		} else {
+			image = [UIImage imageNamed:@"legacy_icon_blur.jpg" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
+		}
+	}
+
+	_imageView = [[UIImageView alloc] initWithImage:image];
 	_imageView.layer.masksToBounds = true;
 	_imageView.layer.cornerRadius = 10.0f;
 	_imageView.translatesAutoresizingMaskIntoConstraints = false;
@@ -355,27 +409,31 @@ NSString *localizedCountString(NSUInteger count) {
 	_imageView.alpha = 0.8;
 
 	CAGradientLayer *gradient = [CAGradientLayer layer];
-	gradient.frame = _imageView.bounds;
+	gradient.frame = self.view.bounds;
 	gradient.colors = @[(id)UIColor.clearColor.CGColor, (id)UIColor.systemBackgroundColor.CGColor];
 
 	CAShapeLayer *mask = [CAShapeLayer layer];
-	mask.frame = _imageView.bounds;
-	mask.path = [UIBezierPath bezierPathWithRect:_imageView.bounds].CGPath;
+	mask.frame = self.view.bounds;
+	mask.path = [UIBezierPath bezierPathWithRect:self.view.bounds].CGPath;
 	mask.fillColor = UIColor.blackColor.CGColor;
 	mask.strokeColor = UIColor.clearColor.CGColor;
 	mask.lineWidth = 0;
 
 	gradient.mask = mask;
 
-	[_imageView.layer addSublayer:gradient];
-
 	[self.view addSubview: _imageView];
+
+	// CGFloat aspectRatio = image.size.height / image.size.width;
 
 	[NSLayoutConstraint activateConstraints:@[
 		[_imageView.widthAnchor constraintEqualToAnchor: self.view.widthAnchor],
 		[_imageView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor],
 		[_imageView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+		// [_imageView.heightAnchor constraintEqualToAnchor:_imageView.widthAnchor multiplier:aspectRatio]
+		// [_imageView.heightAnchor constraintGreaterThanOrEqualToAnchor:self.view.heightAnchor]
 	]];
+
+	[self.view.layer addSublayer:gradient];
 
 	UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	closeButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -444,13 +502,36 @@ NSString *localizedCountString(NSUInteger count) {
     UIImage *newImage = nil;
     NSString *newText = nil;
 
-    if (sender.isOn) {
-        newImage = [UIImage imageNamed:@"no_icon_blur.png" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
-        newText = self.onInfoDescription;
-    } else {
-        newImage = [UIImage imageNamed:@"icon_blur.png" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
-        newText = self.offInfoDescription;
-    }
+	NSArray *windows = UIApplication.sharedApplication.windows;
+	UIWindow *mainWindow = nil;
+	for (UIWindow *window in windows) {
+		if (window.isKeyWindow) {
+			mainWindow = window;
+			break;
+		}
+	}
+
+	UIEdgeInsets safeAreaInsets = mainWindow.safeAreaInsets;
+
+	if (safeAreaInsets.top > 0) {
+		if (sender.isOn) {
+			newImage = [UIImage imageNamed:@"notched_no_icon_blur.png" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
+		} else {
+			newImage = [UIImage imageNamed:@"notched_icon_blur.png" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
+		}
+	} else {
+		if (sender.isOn) {
+			newImage = [UIImage imageNamed:@"legacy_no_icon_blur.jpg" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
+		} else {
+			newImage = [UIImage imageNamed:@"legacy_icon_blur.jpg" inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
+		}
+	}
+
+	if (sender.isOn) {
+		newText = self.onInfoDescription;
+	} else {
+		newText = self.offInfoDescription;
+	}
 
     [UIView transitionWithView:_imageView
                       duration:0.3

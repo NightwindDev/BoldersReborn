@@ -7,7 +7,7 @@ NSCache *versionCache = nil;
 
 NSString *getVersion() {
     if (FINAL == 0) {
-        return @"Release Candidate X";
+        return @"Pre-Release Test";
     } else return PACKAGE_VERSION;
 }
 
@@ -63,7 +63,7 @@ NSString *getVersion() {
         int on = [[[[NSUserDefaults alloc] initWithSuiteName:@"com.nightwind.boldersrebornprefs"] objectForKey:@"tweakEnabled"] intValue];
 
         UISwitch *switchCell = [[UISwitch alloc] initWithFrame: CGRectZero];
-        switchCell.transform = CGAffineTransformMakeScale(1.5, 1.5);
+        switchCell.transform = CGAffineTransformMakeScale(1.3, 1.3);
         switchCell.translatesAutoresizingMaskIntoConstraints = false;
         switchCell.onTintColor = kTintColor;
         switchCell.on = on == 1 ? true : false;
@@ -115,6 +115,16 @@ NSString *getVersion() {
         const char *args[] = {"sbreload", NULL};
         posix_spawn(&pid, ROOT_PATH("/usr/bin/sbreload"), NULL, NULL, (char *const *)args, environ);
     }];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+
+    for (UIView *view in self.subviews) {
+        if (view != self.contentView){
+            [view removeFromSuperview];
+        }
+    }
 }
 
 @end
