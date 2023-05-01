@@ -30,6 +30,8 @@
 @property (nonatomic, strong) _UITextLayoutCanvasView *_textCanvasView;
 @property (nonatomic, strong) UIView *_backgroundView;
 @property (nonatomic, strong) _UITextFieldClearButton *_clearButton;
+@property (nonatomic, strong) UILabel *amtOfApps;
+- (BOOL)showingEditUI;
 @end
 
 @interface SBFolderControllerBackgroundView : UIView
@@ -62,6 +64,7 @@
 @property (nonatomic, strong) SBIconListGridLayout *listLayout;
 @property (nonatomic, assign) NSUInteger numberOfColumns;
 @property (nonatomic, assign) NSUInteger numberOfRows;
+- (id)iconImageAtIndex:(NSUInteger)index;
 @end
 
 @interface _SBIconGridWrapperView : UIImageView

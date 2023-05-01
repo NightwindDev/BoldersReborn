@@ -23,6 +23,8 @@ NSString *localizedCountString(NSUInteger count) {
     return countString;
 }
 
+NSLayoutConstraint *newConstraint;
+
 
 %group BoldersReborn
 
@@ -127,6 +129,7 @@ NSString *localizedCountString(NSUInteger count) {
 
 
 %hook SBFolderTitleTextField
+%property (nonatomic, strong) UILabel *amtOfApps;
 
 // Changes the font of the title of the folder
 - (void)setFont:(UIFont *)font {
@@ -146,16 +149,16 @@ NSString *localizedCountString(NSUInteger count) {
 
 	NSString *text = [[countText stringByReplacingOccurrencesOfString:@"$c" withString:iconCount] stringByReplacingOccurrencesOfString:@"$t" withString:displayName];
 
-	UILabel *amtOfApps = [UILabel new];
-	amtOfApps.text = text;
-	amtOfApps.translatesAutoresizingMaskIntoConstraints = false;
-	amtOfApps.font = [UIFont systemFontOfSize: (25 * subtitleScale_portrait) weight: UIFontWeightSemibold];
-	amtOfApps.alpha = subtitleTransparency_portrait;
-	[self addSubview: amtOfApps];
+	self.amtOfApps = [UILabel new];
+	self.amtOfApps.text = text;
+	self.amtOfApps.translatesAutoresizingMaskIntoConstraints = false;
+	self.amtOfApps.font = [UIFont systemFontOfSize: (25 * subtitleScale_portrait) weight: UIFontWeightSemibold];
+	self.amtOfApps.alpha = subtitleTransparency_portrait;
+	[self addSubview: self.amtOfApps];
 
-	[amtOfApps.bottomAnchor constraintEqualToAnchor: self.topAnchor constant: 15 + subtitleOffset_portrait - topIconInset_portrait].active = true;
-	[amtOfApps.leadingAnchor constraintEqualToAnchor: self.leadingAnchor constant: 20].active = true;
-	[amtOfApps.widthAnchor constraintEqualToAnchor: self.widthAnchor].active = true;
+	// [self.amtOfApps.bottomAnchor constraintEqualToAnchor: self.topAnchor constant: 15 + subtitleOffset_portrait - topIconInset_portrait].active = true;
+	[self.amtOfApps.leadingAnchor constraintEqualToAnchor: self.leadingAnchor constant: 20].active = true;
+	[self.amtOfApps.widthAnchor constraintEqualToAnchor: self.widthAnchor].active = true;
 }
 
 // Places all the views in their correct positions
@@ -177,6 +180,21 @@ NSString *localizedCountString(NSUInteger count) {
 
 	CGRect origClearButtonFrame = self._clearButton.frame;
 	self._clearButton.frame = CGRectMake(origClearButtonFrame.origin.x, origClearButtonFrame.origin.y + titleOffset_portrait - topIconInset_portrait, origClearButtonFrame.size.width, origClearButtonFrame.size.height);
+
+	// ----- //
+
+	newConstraint.active = false;
+
+	if ([self showingEditUI]) {
+		newConstraint = [self.amtOfApps.bottomAnchor constraintEqualToAnchor: self.topAnchor constant: subtitleOffset_portrait - topIconInset_portrait];
+	} else {
+		newConstraint = [self.amtOfApps.bottomAnchor constraintEqualToAnchor: self.topAnchor constant: 15 + subtitleOffset_portrait - topIconInset_portrait];
+	}
+
+	[UIView animateWithDuration:0.3 animations:^{
+		newConstraint.active = true;
+		[self layoutIfNeeded];
+	}];
 }
 
 // Sets the text alignment of the title to left on LTR languages and right on RTL languages
@@ -462,22 +480,25 @@ NSString *localizedCountString(NSUInteger count) {
 
 // Prepares for the adjustment of the folder grid area in a folder preview icon in order to accomodate for the 3x4 layout
 - (void)layoutSubviews {
-	%orig;
+    %orig;
 
-	SBIconGridImage *image = (SBIconGridImage *)self.image;
+	dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		SBIconGridImage *image = (SBIconGridImage *)self.image;
 
-	if (image.numberOfColumns != 2) {
-		if (kUserIsOnIpad) {
-			if (!(image.numberOfRows == 4 && image.numberOfColumns == 4)) {
-				[self adjustTransform];
-			}
-		} else {
-			if (!(image.numberOfRows == 3 && image.numberOfColumns == 3)) {
-				[self adjustTransform];
+		if (image.numberOfColumns > 2 && [image iconImageAtIndex:1]) {
+			if (kUserIsOnIpad) {
+				if (!(image.numberOfRows == 4 && image.numberOfColumns == 4)) {
+					[self adjustTransform];
+				}
+			} else {
+				if (!(image.numberOfRows == 3 && image.numberOfColumns == 3)) {
+					[self adjustTransform];
+				}
 			}
 		}
-	}
+	});
 }
+
 
 // Prepares for the adjustment of the folder grid area in a folder preview icon in order to accomodate for the 3x4 layout
 - (void)reposition {
@@ -485,7 +506,7 @@ NSString *localizedCountString(NSUInteger count) {
 
 	SBIconGridImage *image = (SBIconGridImage *)self.image;
 
-	if (image.numberOfColumns != 2) {
+	if (image.numberOfColumns > 2 && [image iconImageAtIndex:1]) {
 		if (kUserIsOnIpad) {
 			if (!(image.numberOfRows == 4 && image.numberOfColumns == 4)) {
 				[self adjustTransform];
@@ -501,18 +522,22 @@ NSString *localizedCountString(NSUInteger count) {
 // Adjusts the folder grid area in a folder preview icon in order to accomodate for the 3x4 layout
 %new
 - (void)adjustTransform {
-	NSArray *paddingArray = @[@0, @8, @8.5, @8.5, @8.5, @8.5, @8.5, @8.5];
-	NSUInteger padding = (NSUInteger)[paddingArray[rows - 3] integerValue];
+	SBIconGridImage *image = (SBIconGridImage *)self.image;
 
-	CGAffineTransform originalIconView = (self.transform);
-	self.transform = CGAffineTransformMake(
-		originalIconView.a,
-		originalIconView.b,
-		originalIconView.c,
-		originalIconView.d,
-		originalIconView.tx,
-		padding
-	);
+	if ([image iconImageAtIndex:1]) {
+		NSArray *paddingArray = @[@0, @8, @8.5, @8.5, @8.5, @8.5, @8.5, @8.5];
+		NSUInteger padding = (NSUInteger)[paddingArray[rows - 3] integerValue];
+
+		CGAffineTransform originalIconView = (self.transform);
+		self.transform = CGAffineTransformMake(
+			originalIconView.a,
+			originalIconView.b,
+			originalIconView.c,
+			originalIconView.d,
+			originalIconView.tx,
+			padding
+		);
+	}
 }
 
 %end
@@ -542,70 +567,101 @@ NSString *localizedCountString(NSUInteger count) {
 
 %end
 
+
+%hook SBDefaultIconModelStore
+
+- (id)loadCurrentIconState:(NSError **)error {
+    NSUserDefaults *saveStore = [[NSUserDefaults alloc] initWithSuiteName:@"com.nightwind.boldersrebornprefs"];
+
+    id lastKnownState = [saveStore objectForKey:@"saveState"];
+    if(lastKnownState) {
+        return lastKnownState;
+    }
+
+    id orig = %orig;
+    [saveStore setObject:orig forKey:@"saveState"];
+    return orig;
+}
+
+- (BOOL)saveCurrentIconState:(id)state error:(NSError **)error {
+    NSUserDefaults *saveStore = [[NSUserDefaults alloc] initWithSuiteName:@"com.nightwind.boldersrebornprefs"];
+    [saveStore setObject:state forKey:@"saveState"];
+
+    return %orig;
+}
+
+%end
+
+
 %end
 
 %ctor {
+	// void *handle = dlopen(ROOT_PATH("/Library/MobileSubstrate/DynamicLibraries/IconOrder.dylib"), RTLD_LAZY);
 
-	__block NSUserDefaults *prefs = [[NSUserDefaults alloc] initWithSuiteName:@"com.nightwind.boldersrebornprefs"];
+	// if (handle) {
 
-	BOOL (^boolForKey)(NSString *, BOOL) = ^(NSString *key, BOOL def) {
-		return ([prefs objectForKey:key]) ? [prefs boolForKey:key] : def;
-	};
-	NSInteger (^intForKey)(NSString *, NSInteger) = ^(NSString *key, NSInteger def) {
-		return ([prefs objectForKey:key]) ? [prefs integerForKey:key] : def;
-	};
-	NSUInteger (^uintForKey)(NSString *, NSUInteger) = ^(NSString *key, NSUInteger def) {
-		return ([prefs objectForKey:key]) ? [prefs integerForKey:key] : def;
-	};
-	double (^doubleForKey)(NSString *, double) = ^(NSString *key, double def) {
-		return ([prefs objectForKey:key]) ? [prefs doubleForKey:key] : def;
-	};
-	NSString *(^stringForKey)(NSString *, NSString *) = ^(NSString *key, NSString *def) {
-		return ([prefs objectForKey:key]) ? [prefs objectForKey:key] : def;
-	};
+		__block NSUserDefaults *prefs = [[NSUserDefaults alloc] initWithSuiteName:@"com.nightwind.boldersrebornprefs"];
 
-	NSString *genericPath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/LANG.lproj/Localization.strings");
-	NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:[NSLocale.currentLocale.localeIdentifier substringToIndex:2]];
+		BOOL (^boolForKey)(NSString *, BOOL) = ^(NSString *key, BOOL def) {
+			return ([prefs objectForKey:key]) ? [prefs boolForKey:key] : def;
+		};
+		NSInteger (^intForKey)(NSString *, NSInteger) = ^(NSString *key, NSInteger def) {
+			return ([prefs objectForKey:key]) ? [prefs integerForKey:key] : def;
+		};
+		NSUInteger (^uintForKey)(NSString *, NSUInteger) = ^(NSString *key, NSUInteger def) {
+			return ([prefs objectForKey:key]) ? [prefs integerForKey:key] : def;
+		};
+		double (^doubleForKey)(NSString *, double) = ^(NSString *key, double def) {
+			return ([prefs objectForKey:key]) ? [prefs doubleForKey:key] : def;
+		};
+		NSString *(^stringForKey)(NSString *, NSString *) = ^(NSString *key, NSString *def) {
+			return ([prefs objectForKey:key]) ? [prefs objectForKey:key] : def;
+		};
 
-	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:filePath];
+		NSString *genericPath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/LANG.lproj/Localization.strings");
+		NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:[NSLocale.currentLocale.localeIdentifier substringToIndex:2]];
 
-	/*
-	|====================|
-	| Global Preferences |
-	|====================|
-	*/
+		NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:filePath];
 
-	tweakEnabled = boolForKey(@"tweakEnabled", true);
+		/*
+		|====================|
+		| Global Preferences |
+		|====================|
+		*/
 
-	countText = stringForKey(@"countText", [dict objectForKey:@"DEFAULT_APPS"]);
+		tweakEnabled = boolForKey(@"tweakEnabled", true);
 
-    rows = uintForKey(@"rows", 3);
-    columns = uintForKey(@"columns", 3);
+		countText = stringForKey(@"countText", [dict objectForKey:@"DEFAULT_APPS"]);
 
-	/*
-	|======================|
-	| Portrait Preferences |
-	|======================|
-	*/
+		rows = uintForKey(@"rows", 3);
+		columns = uintForKey(@"columns", 3);
 
-	titleOffset_portrait = intForKey(@"titleOffset_portrait", 0);
-	subtitleOffset_portrait = intForKey(@"subtitleOffset_portrait", 0);
-	horizontalIconInset_portrait = intForKey(@"horizontalIconInset_portrait", 0);
-	topIconInset_portrait = intForKey(@"topIconInset_portrait", 0);
-	horizontalOffset_portrait = intForKey(@"horizontalOffset_portrait", 0);
+		/*
+		|======================|
+		| Portrait Preferences |
+		|======================|
+		*/
 
-	titleScale_portrait = doubleForKey(@"titleScale_portrait", 1);
-	subtitleScale_portrait = doubleForKey(@"subtitleScale_portrait", 1);
-	titleTransparency_portrait = doubleForKey(@"titleTransparency_portrait", 1);
-	subtitleTransparency_portrait = doubleForKey(@"subtitleTransparency_portrait", 0.5);
-	verticalIconSpacing_portrait = uintForKey(@"verticalIconSpacing_portrait", 50);
-	iconScale_portrait = doubleForKey(@"iconScale_portrait", 1);
+		titleOffset_portrait = intForKey(@"titleOffset_portrait", 0);
+		subtitleOffset_portrait = intForKey(@"subtitleOffset_portrait", 0);
+		horizontalIconInset_portrait = intForKey(@"horizontalIconInset_portrait", 0);
+		topIconInset_portrait = intForKey(@"topIconInset_portrait", 0);
+		horizontalOffset_portrait = intForKey(@"horizontalOffset_portrait", 0);
 
-	homescreenIconBlur_portrait = boolForKey(@"homescreenIconBlur_portrait", true);
+		titleScale_portrait = doubleForKey(@"titleScale_portrait", 1);
+		subtitleScale_portrait = doubleForKey(@"subtitleScale_portrait", 1);
+		titleTransparency_portrait = doubleForKey(@"titleTransparency_portrait", 1);
+		subtitleTransparency_portrait = doubleForKey(@"subtitleTransparency_portrait", 0.5);
+		verticalIconSpacing_portrait = uintForKey(@"verticalIconSpacing_portrait", 50);
+		iconScale_portrait = doubleForKey(@"iconScale_portrait", 1);
 
-	if (tweakEnabled) {
-		%init(BoldersReborn);
-	}
+		homescreenIconBlur_portrait = boolForKey(@"homescreenIconBlur_portrait", true);
+
+		if (tweakEnabled) {
+			%init(BoldersReborn);
+		}
+
+	// }
 }
 
 /*
