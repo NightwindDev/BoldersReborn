@@ -6,20 +6,14 @@ Firstly, get a copy of the file located [here](/BoldersRebornPrefs/Resources/Loc
 
 You will notice that on the left of the `.strings` file, there are keys in UPPERCASE. Those keys are universal throughout all languages, so they should not be modified. What does need to be modified is the text in the quotes. So for instance, let's say we have:
 
-```json
-// ENGLISH FILE:
-// ...
+```
 HOMESCREEN = "Homescreen";
-// ...
 ```
 
-And we want to translate it to Spanish. We would translate it like this:
+In the English file and we want to translate it to Spanish. We would translate it like this:
 
-```json
-// SPANISH FILE:
-// ...
+```
 HOMESCREEN = "Pantalla de inicio";
-// ...
 ```
 
 Notice how the right side is translated whilst keeping the left side the same.
