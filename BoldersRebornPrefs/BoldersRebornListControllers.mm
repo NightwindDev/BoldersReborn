@@ -287,37 +287,15 @@ NSString *localizedCountString(NSUInteger count) {
 	NSString *genericPath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/LANG.lproj/Localization.strings");
 	NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:kLang];
 
-	// NSUserDefaults *userDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"com.nightwind.boldersrebornprefs"];
+	NSUserDefaults *userDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"com.nightwind.boldersrebornprefs"];
 
-	if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]
-	// && ![[userDefaults objectForKey:@"initialAlertWasShown"] isEqual:@(true)]
-	) {
+	if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]	&& ![[userDefaults objectForKey:@"initialAlertWasShown"] isEqual:@(true)]) {
 		NSString *title = @"Your device's language is not supported.\nHowever...";
 		NSString *message = @"You can either help with translating Bolders Reborn to your language, or continue to use the tweak in English.\n\nDo note that if you want to use English and then reconsider later, you will be able to submit a translation in the bottom of the main page of the settings of the tweak.";
 
 		UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
 
 		[alert addAction:[UIAlertAction actionWithTitle:@"Help With Translation" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-			// [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:@"com.nightwind.boldersrebornprefs"];
-
-			// NSUserDefaults *userDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"com.nightwind.boldersrebornprefs"];
-
-			// [userDefaults setObject:@true forKey:@"tweakEnabled"];
-			// [userDefaults synchronize];
-
-			// UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
-			// UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blur];
-			// blurView.frame = controller.view.bounds;
-			// blurView.alpha = 0;
-			// [controller.view addSubview:blurView];
-
-			// [UIView animateWithDuration:0.50 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-			// 	[blurView setAlpha:1.0];
-			// } completion:^(BOOL finished) {
-			// 	[controller.view endEditing:YES];
-			// 	respring();
-			// }];
-
 			[self openTranslationSite];
 		}]];
 
@@ -326,8 +304,8 @@ NSString *localizedCountString(NSUInteger count) {
 
 		[self presentViewController:alert animated:true completion:nil];
 
-		// [userDefaults setObject:@(true) forKey:@"initialAlertWasShown"];
-		// [userDefaults synchronize];
+		[userDefaults setObject:@(true) forKey:@"initialAlertWasShown"];
+		[userDefaults synchronize];
 	}
 }
 
