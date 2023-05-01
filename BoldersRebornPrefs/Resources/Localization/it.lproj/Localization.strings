@@ -1,0 +1,43 @@
+LABEL_OPTIONS_FOOTER_TEXT = "Esempio: $T ha $C app.\nresult: NomeCartella ha 23 app.";
+LABEL_OPTIONS_LABEL = "Opzioni etichette:";
+HOMESCREEN = "Homescreen";
+COUNT_TEXT = "Etichetta conteggio:";
+ROWS = "↓ RIGHE PER PAGINA";
+COLUMNS_FOOTER_TEXT = "→ ICONE PER RIGA";
+BUILD_ROOTLESS = "Build: Rootless";
+BUILD_ROOTFUL = "Build: Rootful";
+
+TITLE_SCALE = "Grandezza titoli (%)";
+TITLE_TRANSPARENCY = "Trasparenza titoli (%)";
+TITLE_OFFSET = "Distanza titoli [-↑ / +↓]";
+SUBTITLE_SCALE = "Grandezza sottotitoli (%)";
+SUBTITLE_TRANSPARENCY = "Trasparenza sottotitoli (%)";
+SUBTITLE_OFFSET = "Altezza sottotitoli [-↑ / +↓]";
+HORIZONTAL_ICON_INSET_FOOTER_TEXT = "Si usa per avvicinare le icone fra loro orizzontalmente.";
+HORIZONTAL_ICON_INSET = "Distanza orizzontale fra le icone";
+TOP_ICON_INSET_FOOTER_TEXT = "Spazio in più dalla parte superiore dello schermo.";
+TOP_ICON_INSET = "Distanza delle icone dall'alto";
+VERTICAL_ICON_SPACING_FOOTER_TEXT = "Distanza in verticale fra le icone.";
+VERTICAL_ICON_SPACING = "Spazio verticale icone";
+HORIZONTAL_OFFSET_FOOTER_TEXT = "Distanza orizzontale della cartella dalla sua posizione originaria.";
+HORIZONTAL_OFFSET = "Distanza orizzontale";
+ICON_SCALE = "Grandezza delle icone (%)";
+HOMESCREEN_ICON_BLUR_FOOTER_TEXT = "Se attivo: La sfocatura influenza solo lo sfondo.\n\nSe inattivo: La sfocatura dello sfondo interessa anche le icone dell'homescreen.";
+HOMESCREEN_ICON_BLUR = "Sfocatura delle icone della homescreen";
+HOMESCREEN_BLUR = "Sfocatura homescreen";
+HOMESCREEN_ICON_BLUR_ON_INFO_DESCRIPTION = "La sfocatura influenza solo lo sfondo dell'homescreen.";
+HOMESCREEN_ICON_BLUR_OFF_INFO_DESCRIPTION = "La sfocatura dello sfondo interessa anche le icone dell'homescreen.";
+DISMISS_AND_APPLY = "Ignora e applica";
+
+RESPRING = "Respring";
+RESET_PREFS = "Ripristina pref.";
+DEFAULT_APPS = "$C APP";
+RESET_PREFERENCES_QUESTION = "Ripristina preferenze?";
+RESET_PREFERENCES_DESCRIPTION = "Questa scelta non si può annullare.";
+
+RESET_RESET = "Ripristina";
+CANCEL = "Cancella";
+OK = "OK";
+SET_SLIDER_VALUE = "Imposta valore";
+MAX_VALUE = "Valore massimo";
+MIN_VALUE = "Valore minimo";

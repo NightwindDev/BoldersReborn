@@ -619,7 +619,11 @@ NSLayoutConstraint *newConstraint;
 		};
 
 		NSString *genericPath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/LANG.lproj/Localization.strings");
-		NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:[NSLocale.currentLocale.localeIdentifier substringToIndex:2]];
+		NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:NSLocale.currentLocale.languageCode];
+
+		if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+			filePath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/en.lproj/Localization.strings");
+		}
 
 		NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:filePath];
 

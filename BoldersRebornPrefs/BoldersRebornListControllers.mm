@@ -4,7 +4,7 @@
 
 #define kTintColor [UIColor colorWithRed:0.86 green:0.26 blue:0.31 alpha:1.0]
 #define kSelectedTintColor [UIColor colorWithRed:0.84 green:0.44 blue:0.47 alpha:1.0]
-#define lang [NSLocale.currentLocale.localeIdentifier substringToIndex:2]
+#define kLang NSLocale.currentLocale.languageCode
 
 @interface UINavigationItem (Private)
 @property (nonatomic, weak, readwrite) UINavigationBar *navigationBar;
@@ -47,7 +47,11 @@ void performRespringFromController(UIViewController *controller) {
 
 void performResetPrefsFromController(UIViewController *controller) {
 	NSString *genericPath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/LANG.lproj/Localization.strings");
-	NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:lang];
+	NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:kLang];
+
+	if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+		filePath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/en.lproj/Localization.strings");
+	}
 
 	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:filePath];
 
@@ -84,7 +88,11 @@ void performResetPrefsFromController(UIViewController *controller) {
 
 void localize(PSListController *controller, NSArray *_specifiers) {
 	NSString *genericPath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/LANG.lproj/Localization.strings");
-	NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:lang];
+	NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:kLang];
+
+	if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+		filePath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/en.lproj/Localization.strings");
+	}
 
 	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:filePath];
 
@@ -120,7 +128,35 @@ NSString *localizedCountString(NSUInteger count) {
 		_specifiers = [self loadSpecifiersFromPlistName:@"Root" target:self];
 
 		NSString *genericPath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/LANG.lproj/Localization.strings");
-		NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:lang];
+		NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:kLang];
+
+		if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+			filePath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/en.lproj/Localization.strings");
+
+			NSString *langName = [[NSLocale.currentLocale localizedStringForLanguageCode:kLang] capitalizedString];
+			NSString *error = [NSString stringWithFormat:@"The %@ language is not currently supported. Click here to help translate it!", langName];
+			NSRange range = [error rangeOfString:@"here"];
+			NSString *locationOfHere = [NSString stringWithFormat:@"{%lu, %lu}", range.location, range.length];
+
+			[_specifiers addObject:({
+				PSSpecifier *specifier = [PSSpecifier preferenceSpecifierNamed:NULL
+																		target:self
+																		set:NULL
+																		get:NULL
+																		detail:NULL
+																		cell:PSGroupCell
+																		edit:nil];
+
+				[specifier setProperty:@"PSFooterHyperlinkView" forKey:@"footerCellClass"];
+				[specifier setProperty:@"openTranslationSite" forKey:@"footerHyperlinkAction"];
+				[specifier setProperty:error forKey:@"headerFooterHyperlinkButtonTitle"];
+				[specifier setProperty:locationOfHere forKey:@"footerHyperlinkRange"];
+				[specifier setProperty:[NSValue valueWithNonretainedObject:self] forKey:@"footerHyperlinkTarget"];
+
+
+				specifier;
+			})];
+		}
 
 		NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:filePath];
 
@@ -146,6 +182,10 @@ NSString *localizedCountString(NSUInteger count) {
 	return _specifiers;
 }
 
+- (void)openTranslationSite {
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/NightwindDev/BoldersReborn/blob/main/Translation.md"] options:@{} completionHandler:nil];
+}
+
 -(void)_returnKeyPressed:(id)arg1 {
     [self.view endEditing:YES];
 }
@@ -165,7 +205,11 @@ NSString *localizedCountString(NSUInteger count) {
 
 - (void)initTopMenu {
 	NSString *genericPath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/LANG.lproj/Localization.strings");
-	NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:lang];
+	NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:kLang];
+
+	if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+		filePath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/en.lproj/Localization.strings");
+	}
 
 	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:filePath];
 
@@ -239,6 +283,52 @@ NSString *localizedCountString(NSUInteger count) {
                 initWithTarget:self action:@selector(handleSingleTap:)];
     tapper.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapper];
+
+	NSString *genericPath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/LANG.lproj/Localization.strings");
+	NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:kLang];
+
+	// NSUserDefaults *userDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"com.nightwind.boldersrebornprefs"];
+
+	if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]
+	// && ![[userDefaults objectForKey:@"initialAlertWasShown"] isEqual:@(true)]
+	) {
+		NSString *title = @"Your device's language is not supported.\nHowever...";
+		NSString *message = @"You can either help with translating Bolders Reborn to your language, or continue to use the tweak in English.\n\nDo note that if you want to use English and then reconsider later, you will be able to submit a translation in the bottom of the main page of the settings of the tweak.";
+
+		UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+
+		[alert addAction:[UIAlertAction actionWithTitle:@"Help With Translation" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+			// [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:@"com.nightwind.boldersrebornprefs"];
+
+			// NSUserDefaults *userDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"com.nightwind.boldersrebornprefs"];
+
+			// [userDefaults setObject:@true forKey:@"tweakEnabled"];
+			// [userDefaults synchronize];
+
+			// UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
+			// UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blur];
+			// blurView.frame = controller.view.bounds;
+			// blurView.alpha = 0;
+			// [controller.view addSubview:blurView];
+
+			// [UIView animateWithDuration:0.50 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+			// 	[blurView setAlpha:1.0];
+			// } completion:^(BOOL finished) {
+			// 	[controller.view endEditing:YES];
+			// 	respring();
+			// }];
+
+			[self openTranslationSite];
+		}]];
+
+		UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Keep Using English" style:UIAlertActionStyleDestructive handler:nil];
+		[alert addAction:cancelAction];
+
+		[self presentViewController:alert animated:true completion:nil];
+
+		// [userDefaults setObject:@(true) forKey:@"initialAlertWasShown"];
+		// [userDefaults synchronize];
+	}
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *) sender {
@@ -288,7 +378,11 @@ NSString *localizedCountString(NSUInteger count) {
 
 - (void)initTopMenu {
 	NSString *genericPath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/LANG.lproj/Localization.strings");
-	NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:lang];
+	NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:kLang];
+
+	if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+		filePath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/en.lproj/Localization.strings");
+	}
 
 	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:filePath];
 
