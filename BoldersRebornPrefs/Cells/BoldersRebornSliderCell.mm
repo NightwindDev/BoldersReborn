@@ -2,6 +2,11 @@
 
 #import "BoldersRebornSliderCell.h"
 
+@interface UITextField (NumericInput)
+- (void)addNumericAccessory:(BOOL)addPlusMinus;
+- (void)plusMinusPressed;
+@end
+
 NSString *stringFromFloatRoundedToDecimalPlaces(NSUInteger decimalPlaces, float floatValue) {
     NSNumberFormatter *formatter = [NSNumberFormatter new];
     formatter.numberStyle = NSNumberFormatterDecimalStyle;
@@ -21,7 +26,7 @@ NSString *stringFromFloatRoundedToDecimalPlaces(NSUInteger decimalPlaces, float 
     [label.centerYAnchor constraintEqualToAnchor: self.contentView.centerYAnchor].active = true;
     [label.rightAnchor constraintEqualToAnchor: self.contentView.rightAnchor constant: -10].active = true;
 
-    MSHookIvar<NSMutableArray *>(self.control, "_gestureRecognizers") = [NSMutableArray new];
+    MSHookIvar<NSMutableArray *>(self.control, "_gestureRecognizers") = @[].mutableCopy;
 }
 
 - (void)didMoveToSuperview {
@@ -54,6 +59,8 @@ NSString *stringFromFloatRoundedToDecimalPlaces(NSUInteger decimalPlaces, float 
         textField.text = stringFromFloatRoundedToDecimalPlaces(2, [self.controlValue floatValue]);
         textField.placeholder = stringFromFloatRoundedToDecimalPlaces(2, [self.controlValue floatValue]);
         textField.keyboardType = UIKeyboardTypeDecimalPad;
+
+        [textField addNumericAccessory: true];
     }];
 
     UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -81,6 +88,45 @@ NSString *stringFromFloatRoundedToDecimalPlaces(NSUInteger decimalPlaces, float 
     [alertController addAction:cancelAction];
 
     [self._viewControllerForAncestor presentViewController:alertController animated:YES completion:nil];
+}
+
+@end
+
+@implementation UITextField (NumericAccessory)
+
+- (void)addNumericAccessory:(BOOL)addPlusMinus {
+    UIToolbar *numberToolbar = [[UIToolbar alloc] init];
+    numberToolbar.barStyle = UIBarStyleDefault;
+
+    NSMutableArray *accessories = [[NSMutableArray alloc] init];
+
+    if (addPlusMinus) {
+        [accessories addObject:[[UIBarButtonItem alloc] initWithTitle:@"+/-"
+                                                                 style:UIBarButtonItemStylePlain
+                                                                target:self
+                                                                action:@selector(plusMinusPressed)]];
+        [accessories addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                              target:nil
+                                                                              action:nil]]; // add padding after
+    }
+
+    [numberToolbar setItems:accessories];
+    [numberToolbar sizeToFit];
+
+    [self setInputAccessoryView:numberToolbar];
+}
+
+- (void)plusMinusPressed {
+    NSString *currentText = [self text];
+    if (currentText) {
+        if ([currentText hasPrefix:@"-"]) {
+            NSString *substring = [currentText substringFromIndex:1];
+            [self setText:substring];
+        } else {
+            NSString *newText = [NSString stringWithFormat:@"-%@", currentText];
+            [self setText:newText];
+        }
+    }
 }
 
 @end
