@@ -87,12 +87,6 @@ typedef struct SBHIconGridSize {
 - (SBHIconGridSize)gridSizeForCurrentOrientation;
 @end
 
-@interface SBIconListView : UIView
-@property (nonatomic, strong) SBIconListGridLayout *layout;
-@property (nonatomic, strong) SBIconListModel *model;
-@property (nonatomic, strong) NSString *iconLocation;
-@end
-
 @interface SBFolderController : UIView
 @property (nonatomic, readonly, strong) UIView *containerView;
 @end
@@ -119,8 +113,15 @@ typedef struct SBHIconGridSize {
 @interface SBIconListPageControl : UIView
 @end
 
-@interface SpringBoard : UIApplication
-- (void)_simulateHomeButtonPressWithCompletion:(id)completion;
+@interface SBIconListFlowExtendedLayout : NSObject
+@property (nonatomic, strong) SBIconListGridLayoutConfiguration *layoutConfiguration;
+- (id)initWithLayoutConfiguration:(SBIconListGridLayoutConfiguration *)config;
+@end
+
+@interface SBIconListView : UIView
+@property (nonatomic, strong) SBIconListGridLayout *layout;
+@property (nonatomic, strong) SBIconListModel *model;
+@property (nonatomic, strong) NSString *iconLocation;
 @end
 
 /*
@@ -156,6 +157,7 @@ double iconScale_portrait;
 NSUInteger verticalIconSpacing_portrait;
 
 BOOL homescreenIconBlur_portrait;
+BOOL folderBackground_portrait;
 
 /*
 |==================================================================|
@@ -181,4 +183,5 @@ BOOL homescreenIconBlur_portrait;
 // NSUInteger verticalIconSpacing_landscape;
 
 // BOOL homescreenIconBlur_landscape;
+// BOOL folderBackground_landscape;
 id lastIconSuccess;

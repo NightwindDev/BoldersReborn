@@ -47,3 +47,9 @@ OK = "OK";
 SET_SLIDER_VALUE = "Set Slider Value";
 MAX_VALUE = "Max value";
 MIN_VALUE = "Min value";
+
+FOLDER_BACKGROUND = "Folder Background";
+HOMESCREEN_FOLDER_BACKGROUND = "Homescreen Folder Background";
+HOMESCREEN_FOLDER_BACKGROUND_FOOTER_TEXT = "Enabled: Folder icon on the homescreen will have its blur.
+
+Disabled: Folder icon will have a clear background.";

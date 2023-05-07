@@ -41,3 +41,9 @@ OK = "OK";
 SET_SLIDER_VALUE = "Imposta valore";
 MAX_VALUE = "Valore massimo";
 MIN_VALUE = "Valore minimo";
+
+FOLDER_BACKGROUND = "Sfondo cartella";
+HOMESCREEN_FOLDER_BACKGROUND = "Sfondo cartella nella schermata principale";
+HOMESCREEN_FOLDER_BACKGROUND_FOOTER_TEXT = "Abilitato: l'icona della cartella nella schermata principale avrà lo sfondo sfocato.
+
+Disabilitato: l'icona della cartella avrà uno sfondo trasparente.";

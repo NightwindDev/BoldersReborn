@@ -47,3 +47,9 @@ OK = "OK";
 SET_SLIDER_VALUE = "Définir la valeur du curseur";
 MAX_VALUE = "Valeur maximale ";
 MIN_VALUE = "Valeur minimale ";
+
+FOLDER_BACKGROUND = "Fond de dossier";
+HOMESCREEN_FOLDER_BACKGROUND = "Fond de dossier sur l'écran d'accueil";
+HOMESCREEN_FOLDER_BACKGROUND_FOOTER_TEXT = "Activé : L'icône de dossier sur l'écran d'accueil aura un flou.
+
+Désactivé : L'icône de dossier aura un fond clair.";

@@ -47,3 +47,9 @@ OK = "OK";
 SET_SLIDER_VALUE = "Sett glidebryterverdi";
 MAX_VALUE = "Maks verdi";
 MIN_VALUE = "Min verdi";
+
+FOLDER_BACKGROUND = "Mappebakgrunn";
+HOMESCREEN_FOLDER_BACKGROUND = "Mappebakgrunn på startsiden";
+HOMESCREEN_FOLDER_BACKGROUND_FOOTER_TEXT = "Aktivert: Mappeikonet på startsiden vil ha en uklar bakgrunn.
+
+Deaktivert: Mappeikonet vil ha en klar bakgrunn.";

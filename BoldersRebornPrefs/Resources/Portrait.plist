@@ -194,9 +194,9 @@
 			<key>key</key>
 			<string>topIconInset_portrait</string>
 			<key>max</key>
-			<string>100</string>
+			<string>200</string>
 			<key>min</key>
-			<string>-100</string>
+			<string>-200</string>
 			<key>showValue</key>
 			<string>1</string>
 		</dict>
@@ -220,7 +220,7 @@
 			<key>key</key>
 			<string>verticalIconSpacing_portrait</string>
 			<key>max</key>
-			<string>350</string>
+			<string>500</string>
 			<key>min</key>
 			<string>50</string>
 			<key>showValue</key>
@@ -275,6 +275,26 @@
 			<string>0.5</string>
 			<key>showValue</key>
 			<string>1</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>HOMESCREEN_FOLDER_BACKGROUND_FOOTER_TEXT</string>
+			<key>label</key>
+			<string>HOMESCREEN_FOLDER_BACKGROUND</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<string>1</string>
+			<key>defaults</key>
+			<string>com.nightwind.boldersrebornprefs</string>
+			<key>key</key>
+			<string>folderBackground_portrait</string>
+			<key>label</key>
+			<string>FOLDER_BACKGROUND</string>
 		</dict>
 		<dict>
 			<key>cell</key>

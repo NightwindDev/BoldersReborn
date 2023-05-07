@@ -1,43 +1,43 @@
-LABEL_OPTIONS_FOOTER_TEXT = "Ejemplo: $t tiene $c aplicaciones.
-Resultado: NombreDeCarpeta tiene 23 aplicaciones.";
-LABEL_OPTIONS_LABEL = "Opciones de etiqueta:";
-HOMESCREEN = "Pantalla de inicio";
-COUNT_TEXT = "Texto de cantidad:";
+LABEL_OPTIONS_FOOTER_TEXT = "Ejemplo: $t tiene $c aplicaciónes.
+Result: NombreDeCarpeta tiene 23 aplicaciónes..";
+LABEL_OPTIONS_LABEL = "Opciones de Etiquetas:";
+HOMESCREEN = "Pantalla de Inicio";
+COUNT_TEXT = "Texto de Cantidad:";
 ROWS = "↓ FILAS POR PÁGINA";
-COLUMNS_FOOTER_TEXT = "→ ICONOS POR FILA";
-BUILD_ROOTLESS = "Versión: Rootless";
-BUILD_ROOTFUL = "Versión: Rootful";
+COLUMNS_FOOTER_TEXT = "→ ÍCONOS POR FILA";
+BUILD_ROOTLESS = "Build: Rootless";
+BUILD_ROOTFUL = "Build: Rootful";
 
-TITLE_SCALE = "ESCALA DEL TÍTULO (%)";
+TITLE_SCALE = "TAMAÑO DEL TÍTULO (%)";
 TITLE_TRANSPARENCY = "TRANSPARENCIA DEL TÍTULO (%)";
 TITLE_OFFSET = "DESPLAZAMIENTO DEL TÍTULO [-↑ / +↓]";
-SUBTITLE_SCALE = "ESCALA DEL SUBTÍTULO (%)";
+SUBTITLE_SCALE = "TAMAÑO DEL SUBTÍTULO (%)";
 SUBTITLE_TRANSPARENCY = "TRANSPARENCIA DEL SUBTÍTULO (%)";
 SUBTITLE_OFFSET = "DESPLAZAMIENTO DEL SUBTÍTULO [-↑ / +↓]";
-HORIZONTAL_ICON_INSET_FOOTER_TEXT = "Esto puede usarse para apretar los lados de tus íconos más cerca.";
-HORIZONTAL_ICON_INSET = "INSERCIÓN HORIZONTAL DE ÍCONOS";
-TOP_ICON_INSET_FOOTER_TEXT = "Relleno extra desde la parte superior.";
-TOP_ICON_INSET = "ÍCONOS ESPACIO VERTICAL";
-VERTICAL_ICON_SPACING_FOOTER_TEXT = "Espaciado vertical de los íconos.";
-VERTICAL_ICON_SPACING = "ESPIANADOS VERTICAL DE ÍCONOS";
-HORIZONTAL_OFFSET_FOOTER_TEXT = "Desplazamiento horizontal de la carpeta desde su ubicación original.";
+HORIZONTAL_ICON_INSET_FOOTER_TEXT = "Puede usarse para acercar los íconos.";
+HORIZONTAL_ICON_INSET = "INSERCIÓN HORIZONTAL DE ÍCONOS ";
+TOP_ICON_INSET_FOOTER_TEXT = "Espacio adicional desde la parte superior.";
+TOP_ICON_INSET = "ESPACIO VERTICAL ENTRE ÍCONOS";
+VERTICAL_ICON_SPACING_FOOTER_TEXT = "Espaciado vertical de los íconos";
+VERTICAL_ICON_SPACING = "VERTICAL ICON INSET";
+HORIZONTAL_OFFSET_FOOTER_TEXT = "Desplazamiento horizontal de la carpeta desde su posicíon original.";
 HORIZONTAL_OFFSET = "DESPLAZAMIENTO HORIZONTAL";
-ICON_SCALE = "ESCALA DE ÍCONOS (%)";
-HOMESCREEN_ICON_BLUR_FOOTER_TEXT = "Habilitado: El desenfoque del fondo es un desenfoque del fondo de pantalla de la pantalla de inicio.
+ICON_SCALE = "TAMAÑO DE LOS ÍCONOS (%)";
+HOMESCREEN_ICON_BLUR_FOOTER_TEXT = "Activado: Desenfoca el fondo de la pantalla de inicio.
 
-Deshabilitado: El desenfoque del fondo incluye los íconos de la pantalla de inicio.";
-HOMESCREEN_ICON_BLUR = "DESENFOQUE DE ÍCONOS DE PANTALLA DE INICIO";
-HOMESCREEN_BLUR = "Desenfoque de íconos";
-HOMESCREEN_ICON_BLUR_ON_INFO_DESCRIPTION = "El desenfoque de fondo es del fondo de pantalla de inicio.";
-HOMESCREEN_ICON_BLUR_OFF_INFO_DESCRIPTION = "El desenfoque del fondo incluye los íconos de la pantalla de inicio.";
+Desactivado: El desenfoque del fondo incluye la pantalla de inicio.";
+HOMESCREEN_ICON_BLUR = "Desenfoca los íconos de la pantalla de inicio";
+HOMESCREEN_BLUR = "Desenfoque del fondo de pantalla de inicio";
+HOMESCREEN_ICON_BLUR_OFF_INFO_DESCRIPTION = "Desenfoca el fondo de la pantalla de inicio";
+HOMESCREEN_ICON_BLUR_ON_INFO_DESCRIPTION = "El desenfoque del fondo incluye a los íconos.";
 DISMISS_AND_APPLY = "Descartar y aplicar";
 
-RESPRING = "Reiniciar";
+RESPRING = "Respring";
 RESET_PREFS = "Restablecer preferencias";
 DEFAULT_APPS = "$c APLICACIONES";
 
-RESET_PREFERENCES_QUESTION = "¿Restablecer preferencias?";
-RESET_PREFERENCES_DESCRIPTION = "Esto no se puede deshacer.";
+RESET_PREFERENCES_QUESTION = "¿Restablecer preferencias?"
+RESET_PREFERENCES_DESCRIPTION = "No se puede deshacer."
 
 RESET_RESET = "Restablecer";
 
@@ -47,3 +47,9 @@ OK = "OK";
 SET_SLIDER_VALUE = "Establecer valor del control deslizante";
 MAX_VALUE = "Valor máximo";
 MIN_VALUE = "Valor mínimo";
+
+FOLDER_BACKGROUND = "Fondo de carpeta";
+HOMESCREEN_FOLDER_BACKGROUND = "Fondo de carpeta en la pantalla de inicio";
+HOMESCREEN_FOLDER_BACKGROUND_FOOTER_TEXT = "Activado: El icono de carpeta en la pantalla de inicio tendrá un fondo difuminado.
+
+Desactivado: El icono de carpeta tendrá un fondo claro.";

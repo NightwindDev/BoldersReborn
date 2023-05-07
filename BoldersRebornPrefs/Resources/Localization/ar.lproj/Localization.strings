@@ -47,3 +47,9 @@ OK = "حسناً";
 SET_SLIDER_VALUE = "تعيين قيمة المنزلق";
 MAX_VALUE = "الحد الأقصى للقيمة";
 MIN_VALUE = "الحد الأدنى للقيمة";
+
+FOLDER_BACKGROUND = "خلفية المجلد";
+HOMESCREEN_FOLDER_BACKGROUND = "خلفية المجلد في الشاشة الرئيسية";
+HOMESCREEN_FOLDER_BACKGROUND_FOOTER_TEXT = "مُمَكَّن: ستكون أيقونة المجلد على الشاشة الرئيسية بخلفية غامقة.
+
+غير مُمَكَّن: ستكون أيقونة المجلد بخلفية واضحة.";

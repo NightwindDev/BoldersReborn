@@ -1,12 +1,12 @@
 LABEL_OPTIONS_FOOTER_TEXT = "Пример: $t имеет $c приложений.
-Результат: Имя папки имеет 23 приложений.";
+Результат: «Имя папки» имеет 23 приложений.";
 LABEL_OPTIONS_LABEL = "Опции метки:";
 HOMESCREEN = "Экран «Домой»";
 COUNT_TEXT = "Счетный Текст:";
 ROWS = "↓ СТРОК НА СТРАНИЦЕ";
 COLUMNS_FOOTER_TEXT = "→ ИКОНОК В СТРОКЕ";
-BUILD_ROOTLESS = "Сборка: Без root";
-BUILD_ROOTFUL = "Сборка: С root";
+BUILD_ROOTLESS = "Сборка: Рутфул";
+BUILD_ROOTFUL = "Сборка: Рутлесс";
 
 TITLE_SCALE = "МАСШТАБ ЗАГОЛОВКА (%)";
 TITLE_TRANSPARENCY = "ПРОЗРАЧНОСТЬ ЗАГОЛОВКА (%)";
@@ -47,3 +47,9 @@ OK = "OK";
 SET_SLIDER_VALUE = "Установка значения ползунка";
 MAX_VALUE = "Макс.";
 MIN_VALUE = "Мин.";
+
+FOLDER_BACKGROUND = "Фон папки";
+HOMESCREEN_FOLDER_BACKGROUND = "Фон папки на Экране «Домой»";
+HOMESCREEN_FOLDER_BACKGROUND_FOOTER_TEXT = "Включён: Иконка папки на Экране «Домой» будет иметь размытие.
+
+Отключён: Иконка папки будет иметь прозрачный фон.";

@@ -47,3 +47,9 @@ OK = "OK";
 SET_SLIDER_VALUE = "Wert des Schiebereglers festlegen";
 MAX_VALUE = "Maximalwert";
 MIN_VALUE = "Minimalwert";
+
+FOLDER_BACKGROUND = "Ordner-Hintergrund";
+HOMESCREEN_FOLDER_BACKGROUND = "Hintergrund für den Ordner auf dem Startbildschirm";
+HOMESCREEN_FOLDER_BACKGROUND_FOOTER_TEXT = "Aktiviert: Der Ordner-Icon auf dem Startbildschirm wird unscharf dargestellt.
+
+Deaktiviert: Der Ordner-Icon hat einen klaren Hintergrund.";

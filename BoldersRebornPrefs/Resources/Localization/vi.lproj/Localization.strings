@@ -47,3 +47,9 @@ OK = "Đồng ý";
 SET_SLIDER_VALUE = "Thiết lập giá trị thanh trượt";
 MAX_VALUE = "Giá trị tối đa";
 MIN_VALUE = "Giá trị tối thiểu";
+
+FOLDER_BACKGROUND = "Nền Thư Mục";
+HOMESCREEN_FOLDER_BACKGROUND = "Nền Thư Mục Màn Hình Chính";
+HOMESCREEN_FOLDER_BACKGROUND_FOOTER_TEXT = "Bật: Biểu tượng thư mục trên màn hình chính sẽ có độ mờ.
+
+Tắt: Biểu tượng thư mục sẽ có nền trong suốt.";

@@ -47,3 +47,9 @@ OK = "确定";
 SET_SLIDER_VALUE = "设置滑块值";
 MAX_VALUE = "最大值";
 MIN_VALUE = "最小值";
+
+FOLDER_BACKGROUND = "文件夹背景";
+HOMESCREEN_FOLDER_BACKGROUND = "主屏文件夹背景";
+HOMESCREEN_FOLDER_BACKGROUND_FOOTER_TEXT = "启用：主屏幕上的文件夹图标将具有模糊效果。
+
+禁用：文件夹图标将具有清晰的背景。";

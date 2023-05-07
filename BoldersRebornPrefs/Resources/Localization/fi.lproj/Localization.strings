@@ -47,3 +47,9 @@ OK = "OK";
 SET_SLIDER_VALUE = "Aseta liukusäädin arvo";
 MAX_VALUE = "Maksimiarvo";
 MIN_VALUE = "Minimiarvo";
+
+FOLDER_BACKGROUND = "Kansion tausta";
+HOMESCREEN_FOLDER_BACKGROUND = "Kansion tausta aloitusnäytöllä";
+HOMESCREEN_FOLDER_BACKGROUND_FOOTER_TEXT = "Käytössä: Kansion kuvake aloitusnäytöllä on sumennettu.
+
+Pois käytöstä: Kansion kuvake on kirkkaalla taustalla.";

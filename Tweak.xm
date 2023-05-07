@@ -4,7 +4,7 @@
  *
  * A portion of this code is derived from Atria, which is
  * licensed under the GPLv3 license. The original code can be found at
- * https://github.com/ren7995/Atria/blob/17cf2dde27e2e13e7bcd49f497d3d4630b5749c3/Hooks/Layout.xm#L297.
+ * https://github.com/ren7995/Atria
  *
  */
 
@@ -86,20 +86,10 @@ NSLayoutConstraint *newConstraint;
 - (void)didMoveToWindow {
 	%orig;
 
-	UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
+	UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_handleOutsideTap:)];
 	tapGestureRecognizer.numberOfTapsRequired = 1;
 	[self addGestureRecognizer:tapGestureRecognizer];
 }
-
-// Actual implementation for closing the foldr, essentially simulating the press of the home button
-%new
-- (void)tapped {
-	if (MSHookIvar<BOOL>(self, "_isEditing") == false) {
-		SpringBoard *sb = (SpringBoard *)[%c(SpringBoard) sharedApplication];
-		[sb _simulateHomeButtonPressWithCompletion:nil];
-	}
-}
-
 
 %end
 
@@ -126,7 +116,6 @@ NSLayoutConstraint *newConstraint;
 }
 
 %end
-
 
 %hook SBFolderTitleTextField
 %property (nonatomic, strong) UILabel *amtOfApps;
@@ -204,6 +193,8 @@ NSLayoutConstraint *newConstraint;
 
 %end
 
+
+
 %hook SBIconListView
 
 // Needed to check whether the list view is in a folder
@@ -213,12 +204,6 @@ NSLayoutConstraint *newConstraint;
 	if ([self.superview isKindOfClass:%c(SBFloatyFolderScrollView)]) {
 		self.layout.layoutConfiguration.isOldFolder = true;
 		self.layout.layoutConfiguration.check = false;
-
-		for (SBIconView *icon in self.subviews) {
-			icon.iconContentScale = iconScale_portrait;
-
-			// [icon _updateIconContentScale];
-		}
 	}
 }
 
@@ -229,12 +214,6 @@ NSLayoutConstraint *newConstraint;
 	if ([self.superview isKindOfClass:%c(SBFloatyFolderScrollView)]) {
 		self.layout.layoutConfiguration.isOldFolder = true;
 		self.layout.layoutConfiguration.check = false;
-
-		for (SBIconView *icon in self.subviews) {
-			icon.iconContentScale = iconScale_portrait;
-
-			[icon _updateIconContentScale];
-		}
 	}
 }
 
@@ -262,45 +241,6 @@ NSLayoutConstraint *newConstraint;
 	}
 
 	return origLayout;
-}
-
-// Applies the proper icon scale to the icons in the folder
--(void)layoutIconsIfNeeded:(CGFloat)arg0 {
-	%orig;
-
-	if ([self.superview isKindOfClass:%c(SBFloatyFolderScrollView)]) {
-		for (SBIconView *icon in self.subviews) {
-			icon.iconContentScale = iconScale_portrait;
-
-			[icon _updateIconContentScale];
-		}
-	}
-}
-
-// Applies the proper icon scale to the icons in the folder
-- (void)layoutIconsIfNeeded:(CGFloat)arg0 animationType:(NSInteger)arg1 options:(NSUInteger)arg2 {
-	%orig;
-
-	if ([self.superview isKindOfClass:%c(SBFloatyFolderScrollView)]) {
-		for (SBIconView *icon in self.subviews) {
-			icon.iconContentScale = iconScale_portrait;
-
-			[icon _updateIconContentScale];
-		}
-	}
-}
-
-// Applies the proper icon scale to the icons in the folder
-- (void)layoutIconsIfNeededUsingAnimator:(id)arg0 options:(NSUInteger)arg1 {
-	%orig;
-
-	if ([self.superview isKindOfClass:%c(SBFloatyFolderScrollView)]) {
-		for (SBIconView *icon in self.subviews) {
-			icon.iconContentScale = iconScale_portrait;
-
-			[icon _updateIconContentScale];
-		}
-	}
 }
 
 %end
@@ -344,7 +284,6 @@ NSLayoutConstraint *newConstraint;
 
 	return size;
 }
-
 
 %end
 
@@ -558,36 +497,34 @@ NSLayoutConstraint *newConstraint;
 	} else %orig;
 }
 
-- (void)_updateIconContentScale {
-	%orig;
-	if (kIsInFolder) {
-		self.iconContentScale = iconScale_portrait;
+%end
+
+%hook SBFolderIconImageView
+
+- (UIView *)backgroundView {
+	UIView *orig = %orig;
+
+	if (!folderBackground_portrait) {
+		orig.alpha = 0;
 	}
+
+	return orig;
 }
 
 %end
 
+// FIX FROM ATRIA
+%hook SBHDefaultIconListLayoutProvider
 
-%hook SBDefaultIconModelStore
+- (SBIconListFlowExtendedLayout *)layoutForIconLocation:(NSString *)location {
+	SBIconListFlowExtendedLayout *orig = %orig;
 
-- (id)loadCurrentIconState:(NSError **)error {
-    NSUserDefaults *saveStore = [[NSUserDefaults alloc] initWithSuiteName:@"com.nightwind.boldersrebornprefs"];
+	if ([location isEqualToString:@"SBIconLocationFolder"]) {
+		orig.layoutConfiguration.check = false;
+		orig.layoutConfiguration.isOldFolder = true;
+	}
 
-    id lastKnownState = [saveStore objectForKey:@"saveState"];
-    if(lastKnownState) {
-        return lastKnownState;
-    }
-
-    id orig = %orig;
-    [saveStore setObject:orig forKey:@"saveState"];
-    return orig;
-}
-
-- (BOOL)saveCurrentIconState:(id)state error:(NSError **)error {
-    NSUserDefaults *saveStore = [[NSUserDefaults alloc] initWithSuiteName:@"com.nightwind.boldersrebornprefs"];
-    [saveStore setObject:state forKey:@"saveState"];
-
-    return %orig;
+	return orig;
 }
 
 %end
@@ -660,6 +597,8 @@ NSLayoutConstraint *newConstraint;
 		iconScale_portrait = doubleForKey(@"iconScale_portrait", 1);
 
 		homescreenIconBlur_portrait = boolForKey(@"homescreenIconBlur_portrait", true);
+
+		folderBackground_portrait = boolForKey(@"folderBackground_portrait", true);
 
 		if (tweakEnabled) {
 			%init(BoldersReborn);
