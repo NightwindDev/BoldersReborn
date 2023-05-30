@@ -1,0 +1,55 @@
+LABEL_OPTIONS_FOOTER_TEXT = "例: $t には $c 個のアプリがあります
+Result: フォルダーの名前 には 23 個のアプリがあります";
+LABEL_OPTIONS_LABEL = "フォルダ設定:";
+HOMESCREEN = "ホーム画面";
+COUNT_TEXT = "ラベルテキスト:";
+ROWS = "↓ 縦のアプリ表示数";
+COLUMNS_FOOTER_TEXT = "→ 横のアプリ表示数";
+BUILD_ROOTLESS = "ビルド: Rootless";
+BUILD_ROOTFUL = "ビルド: Rootful";
+
+TITLE_SCALE = "フォルダ名サイズ (%)";
+TITLE_TRANSPARENCY = "フォルダ名不透明度 (%)";
+TITLE_OFFSET = "フォルダ名オフセット [-↑ / +↓]";
+SUBTITLE_SCALE = "ラベルテキストサイズ (%)";
+SUBTITLE_TRANSPARENCY = "ラベルテキスト不透明度 (%)";
+SUBTITLE_OFFSET = "ラベルテキストオフセット [-↑ / +↓]";
+HORIZONTAL_ICON_INSET_FOOTER_TEXT = "フォルダ内のアプリアイコン同士の幅(水平方向)を調整することができます。";
+HORIZONTAL_ICON_INSET = "水平方向のアプリアイコンの幅";
+TOP_ICON_INSET_FOOTER_TEXT = "フォルダ内のアプリアイコン同士の幅(上部から)を調整することができます。";
+TOP_ICON_INSET = "上部からのアプリアイコンの幅";
+VERTICAL_ICON_SPACING_FOOTER_TEXT = "フォルダ内のアプリアイコン同士の幅(垂直方向)を調整することができます。";
+VERTICAL_ICON_SPACING = "垂直方向のアプリアイコンの幅";
+HORIZONTAL_OFFSET_FOOTER_TEXT = "フォルダ内の元の位置から水平方向に移動させることができます。";
+HORIZONTAL_OFFSET = "水平方向のオフセット";
+ICON_SCALE = "アプリアイコンサイズ (%)";
+HOMESCREEN_ICON_BLUR_FOOTER_TEXT = "有効の場合: フォルダ内にいるとき、ホーム画面のアプリアイコンは透明化されます。
+
+無効の場合: フォルダ内にいるとき、ホーム画面のアプリアイコンはぼかして表示されます。";
+HOMESCREEN_ICON_BLUR = "フォルダ内でのホーム画面アプリアイコン";
+HOMESCREEN_BLUR = "ぼかし(OFF) / (ON)透明化";
+HOMESCREEN_ICON_BLUR_ON_INFO_DESCRIPTION = "背景のぼかしはホーム画面のアプリアイコンを透明化します。";
+HOMESCREEN_ICON_BLUR_OFF_INFO_DESCRIPTION = "背景のぼかしはホーム画面のアプリアイコンを含めるようになります。";
+DISMISS_AND_APPLY = "これにする！";
+
+RESPRING = "リスプリング";
+RESET_PREFS = "設定をリセット";
+DEFAULT_APPS = "$c 個のアプリ";
+
+RESET_PREFERENCES_QUESTION = "設定をリセットしますか？";
+RESET_PREFERENCES_DESCRIPTION = "この操作を後から取り消すことはできません。";
+
+RESET_RESET = "リセット";
+
+CANCEL = "キャンセル";
+OK = "確定";
+
+SET_SLIDER_VALUE = "数値を手動で入力";
+MAX_VALUE = "最高値";
+MIN_VALUE = "最低値";
+
+FOLDER_BACKGROUND = "ホーム画面でのフォルダ枠";
+HOMESCREEN_FOLDER_BACKGROUND = "透明化(OFF) / (ON)表示";
+HOMESCREEN_FOLDER_BACKGROUND_FOOTER_TEXT = "有効の場合: ホーム画面でフォルダの枠が表示されます。
+
+無効の場合: ホーム画面でフォルダの枠は透明になります。";

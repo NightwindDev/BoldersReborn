@@ -1,6 +1,10 @@
 @import UIKit;
 #import "rootless.h"
 
+@interface UIView ()
+- (UIViewController *)_viewControllerForAncestor;
+@end
+
 @interface SBFolderBackgroundView : UIView
 @end
 
@@ -122,6 +126,10 @@ typedef struct SBHIconGridSize {
 @property (nonatomic, strong) SBIconListGridLayout *layout;
 @property (nonatomic, strong) SBIconListModel *model;
 @property (nonatomic, strong) NSString *iconLocation;
+@end
+
+@interface SBFolderIconImageView : UIView
+@property (nonatomic, strong, readwrite) UIView *backgroundView;
 @end
 
 /*

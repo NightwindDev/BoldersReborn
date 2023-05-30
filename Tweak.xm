@@ -23,6 +23,10 @@ NSString *localizedCountString(NSUInteger count) {
     return countString;
 }
 
+BOOL isProperiOSForHidingBackground() {
+   return [[[UIDevice currentDevice] systemVersion] isEqualToString:@"15.1.1"] ? false : true;
+}
+
 NSLayoutConstraint *newConstraint;
 
 
@@ -82,13 +86,9 @@ NSLayoutConstraint *newConstraint;
 	%orig(arg1, 0);
 }
 
-// Adds a tap recognizer to close the folder if you're pressing anywhere but an icon
-- (void)didMoveToWindow {
-	%orig;
-
-	UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_handleOutsideTap:)];
-	tapGestureRecognizer.numberOfTapsRequired = 1;
-	[self addGestureRecognizer:tapGestureRecognizer];
+// Makes the folder close even if you're tapping on the background that would've originally been there
+- (BOOL)_tapToCloseGestureRecognizer:(id)arg1 shouldReceiveTouch:(id)arg2 {
+	return true;
 }
 
 %end
@@ -223,9 +223,11 @@ NSLayoutConstraint *newConstraint;
 
 	if ([self.superview isKindOfClass:%c(SBFloatyFolderScrollView)]) {
 		for (SBIconView *icon in self.subviews) {
-			icon.iconContentScale = iconScale_portrait;
+			if ([icon respondsToSelector:@selector(setIconContentScale:)]) {
+				icon.iconContentScale = iconScale_portrait;
+			}
 
-			[icon _updateIconContentScale];
+			// [icon _updateIconContentScale];
 		}
 	}
 }
@@ -421,9 +423,9 @@ NSLayoutConstraint *newConstraint;
 - (void)layoutSubviews {
     %orig;
 
-	dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		SBIconGridImage *image = (SBIconGridImage *)self.image;
+	SBIconGridImage *image = (SBIconGridImage *)self.image;
 
+	if ([image respondsToSelector:@selector(iconImageAtIndex:)]) {
 		if (image.numberOfColumns > 2 && [image iconImageAtIndex:1]) {
 			if (kUserIsOnIpad) {
 				if (!(image.numberOfRows == 4 && image.numberOfColumns == 4)) {
@@ -435,7 +437,7 @@ NSLayoutConstraint *newConstraint;
 				}
 			}
 		}
-	});
+	}
 }
 
 
@@ -499,16 +501,28 @@ NSLayoutConstraint *newConstraint;
 
 %end
 
+
+// Hiding the folder background, WHY did iOS 15.1.1 have a different impl -- I will never know
 %hook SBFolderIconImageView
 
-- (UIView *)backgroundView {
-	UIView *orig = %orig;
+- (void)layoutSubviews {
+	%orig;
 
-	if (!folderBackground_portrait) {
-		orig.alpha = 0;
+	if (!folderBackground_portrait && [self _viewControllerForAncestor] && ![[self _viewControllerForAncestor] isKindOfClass:%c(SBHLibraryCategoryIconViewController)]) {
+		for (UIView *subview in self.subviews) {
+			if (!isProperiOSForHidingBackground()) {
+				if (subview == self.subviews[0]) {
+					[subview setAlpha:0];
+				} else if (subview == self.subviews[1]) {
+					[subview setAlpha: 0];
+				}
+			} else {
+				if (![subview subviews] || [subview isKindOfClass:%c(MTMaterialView)]) {
+					[subview setAlpha: 0];
+				}
+			}
+		}
 	}
-
-	return orig;
 }
 
 %end
@@ -533,78 +547,72 @@ NSLayoutConstraint *newConstraint;
 %end
 
 %ctor {
-	// void *handle = dlopen(ROOT_PATH("/Library/MobileSubstrate/DynamicLibraries/IconOrder.dylib"), RTLD_LAZY);
+	__block NSUserDefaults *prefs = [[NSUserDefaults alloc] initWithSuiteName:@"com.nightwind.boldersrebornprefs"];
 
-	// if (handle) {
+	BOOL (^boolForKey)(NSString *, BOOL) = ^(NSString *key, BOOL def) {
+		return ([prefs objectForKey:key]) ? [prefs boolForKey:key] : def;
+	};
+	NSInteger (^intForKey)(NSString *, NSInteger) = ^(NSString *key, NSInteger def) {
+		return ([prefs objectForKey:key]) ? [prefs integerForKey:key] : def;
+	};
+	NSUInteger (^uintForKey)(NSString *, NSUInteger) = ^(NSString *key, NSUInteger def) {
+		return ([prefs objectForKey:key]) ? [prefs integerForKey:key] : def;
+	};
+	double (^doubleForKey)(NSString *, double) = ^(NSString *key, double def) {
+		return ([prefs objectForKey:key]) ? [prefs doubleForKey:key] : def;
+	};
+	NSString *(^stringForKey)(NSString *, NSString *) = ^(NSString *key, NSString *def) {
+		return ([prefs objectForKey:key]) ? [prefs objectForKey:key] : def;
+	};
 
-		__block NSUserDefaults *prefs = [[NSUserDefaults alloc] initWithSuiteName:@"com.nightwind.boldersrebornprefs"];
+	NSString *genericPath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/LANG.lproj/Localization.strings");
+	NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:NSLocale.currentLocale.languageCode];
 
-		BOOL (^boolForKey)(NSString *, BOOL) = ^(NSString *key, BOOL def) {
-			return ([prefs objectForKey:key]) ? [prefs boolForKey:key] : def;
-		};
-		NSInteger (^intForKey)(NSString *, NSInteger) = ^(NSString *key, NSInteger def) {
-			return ([prefs objectForKey:key]) ? [prefs integerForKey:key] : def;
-		};
-		NSUInteger (^uintForKey)(NSString *, NSUInteger) = ^(NSString *key, NSUInteger def) {
-			return ([prefs objectForKey:key]) ? [prefs integerForKey:key] : def;
-		};
-		double (^doubleForKey)(NSString *, double) = ^(NSString *key, double def) {
-			return ([prefs objectForKey:key]) ? [prefs doubleForKey:key] : def;
-		};
-		NSString *(^stringForKey)(NSString *, NSString *) = ^(NSString *key, NSString *def) {
-			return ([prefs objectForKey:key]) ? [prefs objectForKey:key] : def;
-		};
+	if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+		filePath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/en.lproj/Localization.strings");
+	}
 
-		NSString *genericPath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/LANG.lproj/Localization.strings");
-		NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:NSLocale.currentLocale.languageCode];
+	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:filePath];
 
-		if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-			filePath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/en.lproj/Localization.strings");
-		}
+	/*
+	|====================|
+	| Global Preferences |
+	|====================|
+	*/
 
-		NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:filePath];
+	tweakEnabled = boolForKey(@"tweakEnabled", true);
 
-		/*
-		|====================|
-		| Global Preferences |
-		|====================|
-		*/
+	countText = stringForKey(@"countText", [dict objectForKey:@"DEFAULT_APPS"]);
 
-		tweakEnabled = boolForKey(@"tweakEnabled", true);
+	rows = uintForKey(@"rows", 3);
+	columns = uintForKey(@"columns", 3);
 
-		countText = stringForKey(@"countText", [dict objectForKey:@"DEFAULT_APPS"]);
+	/*
+	|======================|
+	| Portrait Preferences |
+	|======================|
+	*/
 
-		rows = uintForKey(@"rows", 3);
-		columns = uintForKey(@"columns", 3);
+	titleOffset_portrait = intForKey(@"titleOffset_portrait", 0);
+	subtitleOffset_portrait = intForKey(@"subtitleOffset_portrait", 0);
+	horizontalIconInset_portrait = intForKey(@"horizontalIconInset_portrait", 0);
+	topIconInset_portrait = intForKey(@"topIconInset_portrait", 0);
+	horizontalOffset_portrait = intForKey(@"horizontalOffset_portrait", 0);
 
-		/*
-		|======================|
-		| Portrait Preferences |
-		|======================|
-		*/
+	titleScale_portrait = doubleForKey(@"titleScale_portrait", 1);
+	subtitleScale_portrait = doubleForKey(@"subtitleScale_portrait", 1);
+	titleTransparency_portrait = doubleForKey(@"titleTransparency_portrait", 1);
+	subtitleTransparency_portrait = doubleForKey(@"subtitleTransparency_portrait", 0.5);
+	verticalIconSpacing_portrait = uintForKey(@"verticalIconSpacing_portrait", 50);
+	iconScale_portrait = doubleForKey(@"iconScale_portrait", 1);
 
-		titleOffset_portrait = intForKey(@"titleOffset_portrait", 0);
-		subtitleOffset_portrait = intForKey(@"subtitleOffset_portrait", 0);
-		horizontalIconInset_portrait = intForKey(@"horizontalIconInset_portrait", 0);
-		topIconInset_portrait = intForKey(@"topIconInset_portrait", 0);
-		horizontalOffset_portrait = intForKey(@"horizontalOffset_portrait", 0);
+	homescreenIconBlur_portrait = boolForKey(@"homescreenIconBlur_portrait", true);
 
-		titleScale_portrait = doubleForKey(@"titleScale_portrait", 1);
-		subtitleScale_portrait = doubleForKey(@"subtitleScale_portrait", 1);
-		titleTransparency_portrait = doubleForKey(@"titleTransparency_portrait", 1);
-		subtitleTransparency_portrait = doubleForKey(@"subtitleTransparency_portrait", 0.5);
-		verticalIconSpacing_portrait = uintForKey(@"verticalIconSpacing_portrait", 50);
-		iconScale_portrait = doubleForKey(@"iconScale_portrait", 1);
+	folderBackground_portrait = boolForKey(@"folderBackground_portrait", true);
 
-		homescreenIconBlur_portrait = boolForKey(@"homescreenIconBlur_portrait", true);
-
-		folderBackground_portrait = boolForKey(@"folderBackground_portrait", true);
-
-		if (tweakEnabled) {
-			%init(BoldersReborn);
-		}
-
-	// }
+	if (tweakEnabled) {
+		%init(BoldersReborn);
+	}
 }
 
 /*

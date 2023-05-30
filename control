@@ -1,10 +1,11 @@
 Package: com.nightwind.boldersreborn
 Name: Bolders Reborn
-Version: 1.0.0
+Version: 1.1.1
 Architecture: iphoneos-arm
 Description: Bigger and bolder folders, remade!
 Maintainer: Nightwind
 Author: candoizo
 Section: Tweaks
+Icon: https://img.chariz.cloud/icon/boldersreborn/icon@3x.png
 Depends: mobilesubstrate (>= 0.9.5000), preferenceloader, com.ichitaso.iconorder
 Conflicts: com.twickd.sirius24.folderplus, xyz.burritoz.thomz.folded, com.yourepo.i0s-tweak3r-betas.foldercontroller14, com.4nni3.coolfolder, com.lizynz.foldercolor, com.ginsu.4ders, com.iadam1n.statusfolder, gsc.ipad, com.lizynz.folderx.rootless, com.lizynz.folderx
