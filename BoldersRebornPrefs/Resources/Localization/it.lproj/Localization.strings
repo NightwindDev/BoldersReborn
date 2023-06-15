@@ -1,4 +1,4 @@
-LABEL_OPTIONS_FOOTER_TEXT = "Esempio: $T ha $C app.\nresult: NomeCartella ha 23 app.";
+LABEL_OPTIONS_FOOTER_TEXT = "Esempio: $t ha $c app.\nresult: NomeCartella ha 23 app.";
 LABEL_OPTIONS_LABEL = "Opzioni etichette:";
 HOMESCREEN = "Homescreen";
 COUNT_TEXT = "Etichetta conteggio:";
@@ -31,7 +31,7 @@ DISMISS_AND_APPLY = "Ignora e applica";
 
 RESPRING = "Respring";
 RESET_PREFS = "Ripristina pref.";
-DEFAULT_APPS = "$C APP";
+DEFAULT_APPS = "$c APP";
 RESET_PREFERENCES_QUESTION = "Ripristina preferenze?";
 RESET_PREFERENCES_DESCRIPTION = "Questa scelta non si può annullare.";
 

@@ -423,6 +423,15 @@ NSLayoutConstraint *newConstraint;
 - (void)layoutSubviews {
     %orig;
 
+	if (UIDevice.currentDevice.systemVersion.floatValue < 15.0) {
+		self.layer.masksToBounds = true;
+		CAShapeLayer *maskLayer = [CAShapeLayer layer];
+		maskLayer.frame = self.bounds;
+		UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(-self.frame.origin.x, 0, self.bounds.size.width + (self.frame.origin.x * 2), self.bounds.size.height - 10.8) byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerBottomRight) cornerRadii:CGSizeMake(14, 14)];
+		maskLayer.path = maskPath.CGPath;
+		self.layer.mask = maskLayer;
+	}
+
 	SBIconGridImage *image = (SBIconGridImage *)self.image;
 
 	if ([image respondsToSelector:@selector(iconImageAtIndex:)]) {
@@ -514,11 +523,11 @@ NSLayoutConstraint *newConstraint;
 				if (subview == self.subviews[0]) {
 					[subview setAlpha:0];
 				} else if (subview == self.subviews[1]) {
-					[subview setAlpha: 0];
+					[subview setAlpha:0];
 				}
 			} else {
 				if (![subview subviews] || [subview isKindOfClass:%c(MTMaterialView)]) {
-					[subview setAlpha: 0];
+					[subview setAlpha:0];
 				}
 			}
 		}
