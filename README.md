@@ -1,4 +1,4 @@
-<img width="70" style="border-radius:10px" src="BoldersRebornPrefs/Resources/pref_icon.png">
+<img width="70" style="border-radius:10px" src="BoldersRebornPrefs/Resources/icon@3.png">
 
 ---
 # Bolders Reborn
