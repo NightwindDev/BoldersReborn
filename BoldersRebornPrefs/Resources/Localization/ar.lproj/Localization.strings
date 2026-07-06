@@ -2,6 +2,8 @@ LABEL_OPTIONS_FOOTER_TEXT = "مثال: $t يحتوي على $c تطبيقات
 النتيجة: المجلد يحتوي على ١٠ تطبيقات";
 LABEL_OPTIONS_LABEL = "إعدادات العنوان";
 HOMESCREEN = "الشاشة الرئيسية";
+PORTRAIT = "عمودي";
+LANDSCAPE = "أفقي";
 COUNT_TEXT = "عدد الأيقونات:";
 ROWS = "↓ المصفوفات في الصفحة";
 COLUMNS_FOOTER_TEXT = "→ الأيقونات في الصف";

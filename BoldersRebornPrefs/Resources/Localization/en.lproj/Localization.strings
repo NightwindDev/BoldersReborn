@@ -2,6 +2,8 @@ LABEL_OPTIONS_FOOTER_TEXT = "Example: $t has $c apps.
 Result: FolderName has 23 apps.";
 LABEL_OPTIONS_LABEL = "Label Options:";
 HOMESCREEN = "Homescreen";
+PORTRAIT = "Portrait";
+LANDSCAPE = "Landscape";
 COUNT_TEXT = "Count Text:";
 ROWS = "↓ ROWS PER PAGE";
 COLUMNS_FOOTER_TEXT = "→ ICONS PER ROW";

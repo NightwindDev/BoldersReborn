@@ -1,0 +1,57 @@
+LABEL_OPTIONS_FOOTER_TEXT = "Örneğin: $t $c uygulamaya sahip.
+Sonuç: KlasörAdı 23 uygulamaya sahip.";
+LABEL_OPTIONS_LABEL = "Başlık Seçenekleri:";
+HOMESCREEN = "Ana Ekran";
+PORTRAIT = "Dikey";
+LANDSCAPE = "Yatay";
+COUNT_TEXT = "Sayı Metni:";
+ROWS = "↓ SAYFA BAŞINA SATIR";
+COLUMNS_FOOTER_TEXT = "→ SATIR BAŞINA SİMGE";
+BUILD_ROOTLESS = "Sürüm: Rootless";
+BUILD_ROOTFUL = "Sürüm: Rootful";
+
+TITLE_SCALE = "BAŞLIK ÖLÇEĞİ %";
+TITLE_TRANSPARENCY = "BAŞLIK SAYDAMLIĞI %";
+TITLE_OFFSET = "BAŞLIK KONUMU -↑ / +↓";
+SUBTITLE_SCALE = "ALT BAŞLIK ÖLÇEĞİ %";
+SUBTITLE_TRANSPARENCY = "ALT BAŞLIK SAYDAMLIĞI %";
+SUBTITLE_OFFSET = "ALT BAŞLIK KONUMU -↑ / +↓";
+HORIZONTAL_ICON_INSET_FOOTER_TEXT = "Simgeleri yanlardan birbirine yaklaştırmak için kullanılır.";
+HORIZONTAL_ICON_INSET = "YATAY SİMGE İÇ BOŞLUĞU";
+TOP_ICON_INSET_FOOTER_TEXT = "Üst kısımdan ek boşluk.";
+TOP_ICON_INSET = "ÜST SİMGE İÇ BOŞLUĞU";
+VERTICAL_ICON_SPACING_FOOTER_TEXT = "Simgelerin dikey aralığı.";
+VERTICAL_ICON_SPACING = "DİKEY SİMGE ARALIĞI";
+HORIZONTAL_OFFSET_FOOTER_TEXT = "Klasörün orijinal konumundan yatay sapması.";
+HORIZONTAL_OFFSET = "YATAY KAYDIRMA";
+ICON_SCALE = "SİMGE ÖLÇEĞİ %";
+HOMESCREEN_ICON_BLUR_FOOTER_TEXT = "Etkin: Arka plan bulanıklığı sadece duvar kağıdını etkiler.
+
+Devre Dışı: Arka plan bulanıklığı ana ekran simgelerini de kapsar.";
+HOMESCREEN_ICON_BLUR = "ANA EKRAN SİMGE BULANIKLIĞI";
+HOMESCREEN_BLUR = "Ana Ekran Bulanıklığı";
+HOMESCREEN_ICON_BLUR_ON_INFO_DESCRIPTION = "Arka plan bulanıklığı ana ekran duvar kağıdının bir bulanıklığıdır.";
+HOMESCREEN_ICON_BLUR_OFF_INFO_DESCRIPTION = "Arka plan bulanıklığı ana ekran simgelerini de içerir.";
+DISMISS_AND_APPLY = "Kapat ve Uygula";
+
+RESPRING = "Respring";
+RESET_PREFS = "Ayarları Sıfırla";
+DEFAULT_APPS = "$c UYGULAMA";
+
+RESET_PREFERENCES_QUESTION = "Ayarlar Sıfırlansın mı?";
+RESET_PREFERENCES_DESCRIPTION = "Bu işlem geri alınamaz.";
+
+RESET_RESET = "Sıfırla";
+
+CANCEL = "Vazgeç";
+OK = "Tamam";
+
+SET_SLIDER_VALUE = "Sürgü Değerini Ayarla";
+MAX_VALUE = "Maksimum değer";
+MIN_VALUE = "Minimum değer";
+
+FOLDER_BACKGROUND = "Klasör Arka Planı";
+HOMESCREEN_FOLDER_BACKGROUND = "Ana Ekran Klasör Arka Planı";
+HOMESCREEN_FOLDER_BACKGROUND_FOOTER_TEXT = "Etkin: Ana ekrandaki klasör simgesi kendi bulanıklığına sahip olur.
+
+Devre Dışı: Klasör simgesi şeffaf bir arka plana sahip olur.";

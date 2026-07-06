@@ -2,6 +2,8 @@ LABEL_OPTIONS_FOOTER_TEXT = "Ví dụ: $t có $c ứng dụng.
 Kết quả: Tên thư mục có 23 ứng dụng.";
 LABEL_OPTIONS_LABEL = "Tùy chọn nhãn:";
 HOMESCREEN = "Màn hình chính";
+PORTRAIT = "Dọc";
+LANDSCAPE = "Ngang";
 COUNT_TEXT = "Đếm văn bản:";
 ROWS = "↓ HÀNG MỖI TRANG";
 COLUMNS_FOOTER_TEXT = "→ CÁC ICON MỖI HÀNG";

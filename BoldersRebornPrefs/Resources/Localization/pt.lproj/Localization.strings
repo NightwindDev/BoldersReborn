@@ -2,6 +2,8 @@ LABEL_OPTIONS_FOOTER_TEXT = "Exemplo: $t tem $c aplicativos.
 Resultado: FolderName tem 23 aplicativos.";
 LABEL_OPTIONS_LABEL = "Opções da etiqueta:";
 HOMESCREEN = "Tela inicial";
+PORTRAIT = "Retrato";
+LANDSCAPE = "Paisagem";
 COUNT_TEXT = "Contagem: ";
 ROWS = "↓ LINHAS POR PAGINA";
 COLUMNS_FOOTER_TEXT = "→ ICONES POR LINHAS";

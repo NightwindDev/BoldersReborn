@@ -2,6 +2,8 @@ LABEL_OPTIONS_FOOTER_TEXT = "Esimerkki: $t on $c sovellukset.
 Tulos: Kansiossa on 23 sovellusta.";
 LABEL_OPTIONS_LABEL = "Merkinnän vaihtoehdot:";
 HOMESCREEN = "Kotinäkymä";
+PORTRAIT = "Pysty";
+LANDSCAPE = "Vaaka";
 COUNT_TEXT = "Laske Teksti:";
 ROWS = "↓ RIVET/SIVU";
 COLUMNS_FOOTER_TEXT = "→ KUVAKKEET/RIVI";

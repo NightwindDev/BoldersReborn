@@ -2,6 +2,8 @@ LABEL_OPTIONS_FOOTER_TEXT = "Ejemplo: $t tiene $c aplicaciónes.
 Result: NombreDeCarpeta tiene 23 aplicaciónes..";
 LABEL_OPTIONS_LABEL = "Opciones de Etiquetas:";
 HOMESCREEN = "Pantalla de Inicio";
+PORTRAIT = "Vertical";
+LANDSCAPE = "Horizontal";
 COUNT_TEXT = "Texto de Cantidad:";
 ROWS = "↓ FILAS POR PÁGINA";
 COLUMNS_FOOTER_TEXT = "→ ÍCONOS POR FILA";

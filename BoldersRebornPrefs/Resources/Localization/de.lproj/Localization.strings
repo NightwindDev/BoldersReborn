@@ -2,6 +2,8 @@ LABEL_OPTIONS_FOOTER_TEXT = "Beispiel: $t hat $c Apps.
 Ergebnis: FolderName hat 23 Apps.";
 LABEL_OPTIONS_LABEL = "Label-Optionen:";
 HOMESCREEN = "Home-Bildschirm";
+PORTRAIT = "Hochformat";
+LANDSCAPE = "Querformat";
 COUNT_TEXT = "Zähltext:";
 ROWS = "↓ REIHEN PRO SEITE";
 COLUMNS_FOOTER_TEXT = "→ APPS PRO REIHE";

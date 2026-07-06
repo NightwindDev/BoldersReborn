@@ -2,6 +2,8 @@ LABEL_OPTIONS_FOOTER_TEXT = "例: $t には $c 個のアプリがあります
 Result: フォルダーの名前 には 23 個のアプリがあります";
 LABEL_OPTIONS_LABEL = "フォルダ設定:";
 HOMESCREEN = "ホーム画面";
+PORTRAIT = "縦向き";
+LANDSCAPE = "横向き";
 COUNT_TEXT = "ラベルテキスト:";
 ROWS = "↓ 縦のアプリ表示数";
 COLUMNS_FOOTER_TEXT = "→ 横のアプリ表示数";

@@ -29,8 +29,10 @@ This project is licensed under [GPLv3](LICENSE).
 ###### 🇩🇪 • German • [ChatGPT](https://chat.openai.com)
 ###### 🇮🇱 • Hebrew • [guezomri](https://twitter.com/guezomri)
 ###### 🇳🇴 • Norwegian • [SanderzenHD](https://twitter.com/sanderzenhd)
+###### 🇵🇹 • Portuguese • [eduxz](https://discordapp.com/users/823623367084343316)
 ###### 🇷🇺 • Russian • [Ivan](https://discordapp.com/users/401724303248457739)
 ###### 🇪🇸 • Spanish • [ChatGPT](https://chat.openai.com) & [uroboro](https://github.com/uroboro)
+###### 🇹🇷 • Turkish • offp001
 ###### 🇻🇳 • Vietnamese • [ChatGPT](https://chat.openai.com)
 ---
 ###### Copyright (c) 2024 Nightwind. All rights reserved.

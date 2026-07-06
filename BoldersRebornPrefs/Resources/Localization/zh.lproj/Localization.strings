@@ -2,6 +2,8 @@ LABEL_OPTIONS_FOOTER_TEXT = "举例: $t 有 $c 个应用程序.
 结果: FolderName 有 23 个应用程序.";
 LABEL_OPTIONS_LABEL = "标签选项:";
 HOMESCREEN = "主屏幕";
+PORTRAIT = "竖屏";
+LANDSCAPE = "横屏";
 COUNT_TEXT = "计数文本:";
 ROWS = "↓ 每页行数";
 COLUMNS_FOOTER_TEXT = "→ 每行图标数";

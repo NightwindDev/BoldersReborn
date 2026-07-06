@@ -2,6 +2,8 @@ LABEL_OPTIONS_FOOTER_TEXT = "Eksempel: $t har $c apper
 Resultat: mappenavn har 23 apper.";
 LABEL_OPTIONS_LABEL = "Etikett alternativer";
 HOMESCREEN = "Hjemskjerm";
+PORTRAIT = "Stående";
+LANDSCAPE = "Liggende";
 COUNT_TEXT = "Telle teksten:";
 ROWS = "↓ RADER PER SIDE";
 COLUMNS_FOOTER_TEXT = "→ IKONER PER RAD";

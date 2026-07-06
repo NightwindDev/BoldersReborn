@@ -2,6 +2,8 @@ LABEL_OPTIONS_FOOTER_TEXT = "Exemple: $t a $c applis.
 Résultat: Dossier a 23 applis.";
 LABEL_OPTIONS_LABEL = "Option d'étiquetage:";
 HOMESCREEN = "Écran d'accueil";
+PORTRAIT = "Portrait";
+LANDSCAPE = "Paysage";
 COUNT_TEXT = "Compteur d'applis:";
 ROWS = "↓ LIGNES PAR PAGES";
 COLUMNS_FOOTER_TEXT = "→ ICONES PAR PAGES";

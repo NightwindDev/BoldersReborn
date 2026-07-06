@@ -2,6 +2,8 @@ LABEL_OPTIONS_FOOTER_TEXT = "Пример: $t имеет $c приложений
 Результат: «Имя папки» имеет 23 приложений.";
 LABEL_OPTIONS_LABEL = "Опции метки:";
 HOMESCREEN = "Экран «Домой»";
+PORTRAIT = "Вертикальный";
+LANDSCAPE = "Горизонтальный";
 COUNT_TEXT = "Счетный Текст:";
 ROWS = "↓ СТРОК НА СТРАНИЦЕ";
 COLUMNS_FOOTER_TEXT = "→ ИКОНОК В СТРОКЕ";

@@ -1,6 +1,8 @@
 LABEL_OPTIONS_FOOTER_TEXT = "Esempio: $t ha $c app.\nresult: NomeCartella ha 23 app.";
 LABEL_OPTIONS_LABEL = "Opzioni etichette:";
 HOMESCREEN = "Homescreen";
+PORTRAIT = "Verticale";
+LANDSCAPE = "Orizzontale";
 COUNT_TEXT = "Etichetta conteggio:";
 ROWS = "↓ RIGHE PER PAGINA";
 COLUMNS_FOOTER_TEXT = "→ ICONE PER RIGA";
