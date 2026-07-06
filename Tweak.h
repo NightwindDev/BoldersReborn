@@ -1,8 +1,19 @@
 #import <UIKit/UIKit.h>
 #import <rootless.h>
 
+@protocol SBUIActiveOrientationObserver <NSObject>
+- (void)activeInterfaceOrientationDidChangeToOrientation:(UIInterfaceOrientation)orientation willAnimateWithDuration:(NSTimeInterval)duration fromOrientation:(UIInterfaceOrientation)previousOrientation;
+- (void)activeInterfaceOrientationWillChangeToOrientation:(UIInterfaceOrientation)orientation;
+@end
+
 @interface UIView (Undocumented)
 - (UIViewController *)_viewControllerForAncestor;
+@end
+
+@interface SpringBoard : UIApplication
++ (instancetype)sharedApplication;
+- (UIDeviceOrientation)activeInterfaceOrientation;
+- (void)addActiveOrientationObserver:(id<SBUIActiveOrientationObserver>)observer;
 @end
 
 @interface SBFolderBackgroundView : UIView
@@ -25,7 +36,7 @@
 @interface _UITextFieldClearButton : UIButton
 @end
 
-@interface SBFolderTitleTextField : UITextField
+@interface SBFolderTitleTextField : UITextField <SBUIActiveOrientationObserver>
 @property (nonatomic, strong) _UITextLayoutCanvasView *_textCanvasView;
 @property (nonatomic, strong) UIView *_backgroundView;
 @property (nonatomic, strong) _UITextFieldClearButton *_clearButton;
@@ -41,9 +52,11 @@
 @property (nonatomic, strong) NSString *displayName;
 @end
 
-@interface SBFloatyFolderView : UIView
+@interface SBFloatyFolderView : UIView <SBUIActiveOrientationObserver>
 @property (nonatomic, strong, readonly, getter=_titleTextField) SBFolderTitleTextField *titleTextField;
+@property (nonatomic, strong) UIView *scalingView;
 @property (nonatomic, strong) SBFolder *folder;
+- (void)_updateScalingViewFrame;
 @end
 
 @interface SBFloatyFolderController : NSObject
@@ -126,6 +139,15 @@ NSString *countText;
 NSUInteger rows;
 NSUInteger columns;
 
+double titleScale;
+double subtitleScale;
+double titleTransparency;
+double subtitleTransparency;
+double iconScale;
+
+BOOL homescreenIconBlur;
+BOOL folderBackground;
+
 /*
 |======================|
 | Portrait Preferences |
@@ -137,39 +159,17 @@ NSInteger subtitleOffset_portrait;
 NSInteger horizontalIconInset_portrait;
 NSInteger topIconInset_portrait;
 NSInteger horizontalOffset_portrait;
-
-double titleScale_portrait;
-double subtitleScale_portrait;
-double titleTransparency_portrait;
-double subtitleTransparency_portrait;
-double iconScale_portrait;
 NSUInteger verticalIconSpacing_portrait;
 
-BOOL homescreenIconBlur_portrait;
-BOOL folderBackground_portrait;
-
 /*
-|==================================================================|
-| Landscape Preferences                                            |
-| ---------------------------------------------------------------- |
-| The original Bolders had landscape as well.                      |
-| However, since landscape is pretty much broken on iOS 14 and 15, |
-| Landscape support is not planned at the moment.                  |
-|==================================================================|
+|=======================|
+| Landscape Preferences |
+|=======================|
 */
 
-// NSInteger titleOffset_landscape;
-// NSInteger subtitleOffset_landscape;
-// NSInteger horizontalIconInset_landscape;
-// NSInteger topIconInset_landscape;
-// NSInteger horizontalOffset_landscape;
-
-// double titleScale_landscape;
-// double subtitleScale_landscape;
-// double titleTransparency_landscape;
-// double subtitleTransparency_landscape;
-// double iconScale_landscape;
-// NSUInteger verticalIconSpacing_landscape;
-
-// BOOL homescreenIconBlur_landscape;
-// BOOL folderBackground_landscape;
+NSInteger titleOffset_landscape;
+NSInteger subtitleOffset_landscape;
+NSInteger horizontalIconInset_landscape;
+NSInteger topIconInset_landscape;
+NSInteger horizontalOffset_landscape;
+NSUInteger verticalIconSpacing_landscape;

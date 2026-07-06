@@ -140,25 +140,3 @@
 - (void)setTitle:(NSString *)title {}
 
 @end
-
-/*
-|==================================================================|
-| Landscape Preferences                                            |
-| - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  |
-| The original Bolders had landscape as well.                      |
-| However, since landscape is pretty much broken on iOS 14 and 15, |
-| Landscape support is not planned at the moment.                  |
-|==================================================================|
-*/
-
-// @implementation BoldersRebornLandscapeController
-
-// - (NSArray *)specifiers {
-// 	if (!_specifiers) {
-// 		_specifiers = [self loadSpecifiersFromPlistName:@"Landscape" target:self];
-// 	}
-
-// 	return _specifiers;
-// }
-
-// @end

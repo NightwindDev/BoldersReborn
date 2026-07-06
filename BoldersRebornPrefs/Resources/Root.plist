@@ -63,13 +63,23 @@
 			<key>cell</key>
 			<string>PSLinkCell</string>
 			<key>detail</key>
-			<string>BoldersRebornPortraitController</string>
+			<string>BoldersRebornHomescreenController</string>
 			<key>isController</key>
 			<string>1</string>
 			<key>label</key>
 			<string>HOMESCREEN</string>
 		</dict>
-		<!--<dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>detail</key>
+			<string>BoldersRebornPortraitController</string>
+			<key>isController</key>
+			<string>1</string>
+			<key>label</key>
+			<string>PORTRAIT</string>
+		</dict>
+		<dict>
 			<key>cell</key>
 			<string>PSLinkCell</string>
 			<key>detail</key>
@@ -77,8 +87,8 @@
 			<key>isController</key>
 			<string>1</string>
 			<key>label</key>
-			<string>Landscape</string>
-		</dict>-->
+			<string>LANDSCAPE</string>
+		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSEditTextCell</string>
@@ -132,6 +142,8 @@
 				<string>9</string>
 				<string>10</string>
 			</array>
+			<key>id</key>
+			<string>rows</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -164,6 +176,8 @@
 				<string>9</string>
 				<string>10</string>
 			</array>
+			<key>id</key>
+			<string>columns</string>
 		</dict>
 	</array>
 	<key>title</key>

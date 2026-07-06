@@ -11,6 +11,11 @@
 #import "Tweak.h"
 #import "Localization.h"
 
+static BOOL deviceIsInLandscapeMode(void) {
+	UIDeviceOrientation const orientation = [[%c(SpringBoard) sharedApplication] activeInterfaceOrientation];
+	return UIDeviceOrientationIsLandscape(orientation);
+}
+
 static id lastIconSuccess = nil;
 
 // This hook hides the background square of the original folder layout
@@ -28,7 +33,7 @@ static id lastIconSuccess = nil;
 %hook SBFolderController
 
 - (BOOL)_homescreenAndDockShouldFade {
-	return homescreenIconBlur_portrait ? true : false;
+	return homescreenIconBlur ? true : false;
 }
 
 %end
@@ -45,18 +50,24 @@ static id lastIconSuccess = nil;
 - (CGRect)_frameForScalingView {
 	CGRect frame = %orig;
 
-	return CGRectMake(frame.origin.x - 36 + horizontalIconInset_portrait + horizontalOffset_portrait,
-					  frame.origin.y + topIconInset_portrait,
-					  UIScreen.mainScreen.bounds.size.width - 18 - (horizontalIconInset_portrait * 2),
-					  frame.size.height + verticalIconSpacing_portrait);
-}
+	NSInteger horizontalIconInset = horizontalIconInset_portrait;
+	NSInteger horizontalOffset = horizontalOffset_portrait;
+	NSInteger topIconInset = topIconInset_portrait;
+	NSUInteger verticalIconSpacing = verticalIconSpacing_portrait;
 
-- (NSInteger)iconVisibilityHandling {
-	return 0;
-}
+	if (deviceIsInLandscapeMode()) {
+		horizontalIconInset = horizontalIconInset_landscape;
+		horizontalOffset = horizontalOffset_landscape;
+		topIconInset = topIconInset_landscape;
+		verticalIconSpacing = verticalIconSpacing_landscape;
+	}
 
-- (void)updateVisibleColumnRangeWithTotalLists:(NSUInteger)arg1 iconVisibilityHandling:(NSInteger)arg2 {
-	%orig(arg1, 0);
+	BOOL const iPad = UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad;
+
+	return CGRectMake(frame.origin.x - (iPad ? 0 : 36) + horizontalIconInset + horizontalOffset,
+					  frame.origin.y + topIconInset,
+					  (iPad ? frame.size.width : UIScreen.mainScreen.bounds.size.width) - 18 - (horizontalIconInset * 2),
+					  frame.size.height + verticalIconSpacing);
 }
 
 // Makes the folder close even if you're tapping on the background that would've originally been there
@@ -69,6 +80,21 @@ static id lastIconSuccess = nil;
 	}
 
 	return %orig;
+}
+
+- (void)didMoveToWindow {
+	%orig;
+	[[%c(SpringBoard) sharedApplication] addActiveOrientationObserver:self];
+}
+
+%new
+- (void)activeInterfaceOrientationWillChangeToOrientation:(UIInterfaceOrientation)orientation {}
+
+%new
+- (void)activeInterfaceOrientationDidChangeToOrientation:(UIInterfaceOrientation)orientation willAnimateWithDuration:(NSTimeInterval)duration fromOrientation:(UIInterfaceOrientation)previousOrientation {
+	[self _updateScalingViewFrame];
+	[self layoutIfNeeded];
+	[self.scalingView layoutIfNeeded];
 }
 
 %end
@@ -115,7 +141,7 @@ static id lastIconSuccess = nil;
 
 // Changes the font of the title of the folder
 - (void)setFont:(UIFont *)font {
-	%orig([UIFont systemFontOfSize:(50 * titleScale_portrait) weight:UIFontWeightSemibold]);
+	%orig([UIFont systemFontOfSize:(50 * titleScale) weight:UIFontWeightSemibold]);
 }
 
 // Adds the app count label to the folder
@@ -127,18 +153,31 @@ static id lastIconSuccess = nil;
 		self._br_numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
 	}
 
-	self.textColor = [self.textColor colorWithAlphaComponent:titleTransparency_portrait];
+	self.textColor = [self.textColor colorWithAlphaComponent:titleTransparency];
 
 	self._br_appCountLabel = [UILabel new];
 	self._br_appCountLabel.translatesAutoresizingMaskIntoConstraints = false;
-	self._br_appCountLabel.font = [UIFont systemFontOfSize:(25 * subtitleScale_portrait) weight:UIFontWeightSemibold];
+	self._br_appCountLabel.font = [UIFont systemFontOfSize:(25 * subtitleScale) weight:UIFontWeightSemibold];
 	self._br_appCountLabel.textColor = [UIColor whiteColor];
-	self._br_appCountLabel.alpha = subtitleTransparency_portrait;
+	self._br_appCountLabel.alpha = subtitleTransparency;
 	[self addSubview:self._br_appCountLabel];
 
 	[self._br_appCountLabel.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:20].active = true;
 	[self._br_appCountLabel.widthAnchor constraintEqualToAnchor:self.widthAnchor].active = true;
-	[self._br_appCountLabel.bottomAnchor constraintEqualToAnchor:self.topAnchor constant:15 + subtitleOffset_portrait - topIconInset_portrait].active = true;
+
+	NSInteger subtitleOffset = subtitleOffset_portrait;
+	NSInteger topIconInset = topIconInset_portrait;
+
+	if (deviceIsInLandscapeMode()) {
+		subtitleOffset = subtitleOffset_landscape;
+		topIconInset = topIconInset_landscape;
+	}
+
+	self._br_newConstraint.active = false;
+	self._br_newConstraint = [self._br_appCountLabel.bottomAnchor constraintEqualToAnchor:self.topAnchor constant:15 + subtitleOffset - topIconInset];
+	self._br_newConstraint.active = true;
+
+	[[%c(SpringBoard) sharedApplication] addActiveOrientationObserver:self];
 }
 
 // Places all the views in their correct positions
@@ -146,32 +185,48 @@ static id lastIconSuccess = nil;
 	%orig;
 
 	if (![self showingEditUI]) {
+		NSInteger titleOffset = titleOffset_portrait;
+		NSInteger topIconInset = topIconInset_portrait;
+
+		if (deviceIsInLandscapeMode()) {
+			titleOffset = titleOffset_landscape;
+			topIconInset = topIconInset_landscape;
+		}
+
 		const BOOL deviceLanguageIsRTL = [NSLocale characterDirectionForLanguage:NSLocale.preferredLanguages.firstObject] == NSLocaleLanguageDirectionRightToLeft;
 
 		const CGRect origTextFrame = self._textCanvasView.frame;
-		self._textCanvasView.frame = CGRectMake(deviceLanguageIsRTL ? -55 : 20, origTextFrame.origin.y + titleOffset_portrait - topIconInset_portrait, UIScreen.mainScreen.bounds.size.width, origTextFrame.size.height);
+		self._textCanvasView.frame = CGRectMake(deviceLanguageIsRTL ? -55 : 20, origTextFrame.origin.y + titleOffset - topIconInset, UIScreen.mainScreen.bounds.size.width, origTextFrame.size.height);
 
 		const CGRect origBGFrame = self._backgroundView.frame;
-		self._backgroundView.frame = CGRectMake(origBGFrame.origin.x, origBGFrame.origin.y + titleOffset_portrait - topIconInset_portrait, origBGFrame.size.width, origBGFrame.size.height);
+		self._backgroundView.frame = CGRectMake(origBGFrame.origin.x, origBGFrame.origin.y + titleOffset - topIconInset, origBGFrame.size.width, origBGFrame.size.height);
 
 		const CGRect origClearButtonFrame = self._clearButton.frame;
-		self._clearButton.frame = CGRectMake(origClearButtonFrame.origin.x, origClearButtonFrame.origin.y + titleOffset_portrait - topIconInset_portrait, origClearButtonFrame.size.width, origClearButtonFrame.size.height);
+		self._clearButton.frame = CGRectMake(origClearButtonFrame.origin.x, origClearButtonFrame.origin.y + titleOffset - topIconInset, origClearButtonFrame.size.width, origClearButtonFrame.size.height);
 	}
 }
 
 - (void)setShowsEditUI:(BOOL)showsEditUI animated:(BOOL)animated {
 	%orig;
 
+	NSInteger subtitleOffset = subtitleOffset_portrait;
+	NSInteger topIconInset = topIconInset_portrait;
+
+	if (deviceIsInLandscapeMode()) {
+		subtitleOffset = subtitleOffset_landscape;
+		topIconInset = topIconInset_landscape;
+	}
+
 	self._br_newConstraint.active = false;
 
 	if (showsEditUI) {
-		self._br_newConstraint = [self._br_appCountLabel.bottomAnchor constraintEqualToAnchor:self.topAnchor constant:subtitleOffset_portrait - topIconInset_portrait];
+		self._br_newConstraint = [self._br_appCountLabel.bottomAnchor constraintEqualToAnchor:self.topAnchor constant:subtitleOffset - topIconInset];
 	} else {
-		self._br_newConstraint = [self._br_appCountLabel.bottomAnchor constraintEqualToAnchor:self.topAnchor constant:15 + subtitleOffset_portrait - topIconInset_portrait];
+		self._br_newConstraint = [self._br_appCountLabel.bottomAnchor constraintEqualToAnchor:self.topAnchor constant:15 + subtitleOffset - topIconInset];
 	}
 
 	[UIView animateWithDuration:0.3 animations:^{
-		self._br_appCountLabel.alpha = showsEditUI ? 0.0f : subtitleTransparency_portrait;
+		self._br_appCountLabel.alpha = showsEditUI ? 0.0f : subtitleTransparency;
 		self._br_newConstraint.active = true;
 		[self layoutIfNeeded];
 	}];
@@ -193,6 +248,26 @@ static id lastIconSuccess = nil;
 	NSString *displayName = delegate.folder.displayName;
 	NSString *text = [[countText stringByReplacingOccurrencesOfString:@"$c" withString:iconCount] stringByReplacingOccurrencesOfString:@"$t" withString:displayName];
 	self._br_appCountLabel.text = text;
+}
+
+%new
+- (void)activeInterfaceOrientationWillChangeToOrientation:(UIInterfaceOrientation)orientation {}
+
+%new
+- (void)activeInterfaceOrientationDidChangeToOrientation:(UIInterfaceOrientation)orientation willAnimateWithDuration:(NSTimeInterval)duration fromOrientation:(UIInterfaceOrientation)previousOrientation {
+	NSInteger subtitleOffset = subtitleOffset_portrait;
+	NSInteger topIconInset = topIconInset_portrait;
+
+	if (UIInterfaceOrientationIsLandscape(orientation)) {
+		subtitleOffset = subtitleOffset_landscape;
+		topIconInset = topIconInset_landscape;
+	}
+
+	self._br_newConstraint.active = false;
+	self._br_newConstraint = [self._br_appCountLabel.bottomAnchor constraintEqualToAnchor:self.topAnchor constant:15 + subtitleOffset - topIconInset];
+	self._br_newConstraint.active = true;
+
+	[self layoutIfNeeded];
 }
 
 %end
@@ -228,7 +303,7 @@ static id lastIconSuccess = nil;
 	if ([self.superview isKindOfClass:%c(SBFloatyFolderScrollView)]) {
 		for (SBIconView *icon in self.subviews) {
 			if ([icon respondsToSelector:@selector(setIconContentScale:)]) {
-				icon.iconContentScale = iconScale_portrait;
+				icon.iconContentScale = iconScale;
 			}
 		}
 	}
@@ -326,6 +401,28 @@ static id lastIconSuccess = nil;
 	return %orig;
 }
 
+// This patches the amount of rows in a folder in landscape mode
+- (NSUInteger)numberOfLandscapeRows {
+	[self checkIfFolder];
+
+	if (self.isOldFolder && !self.check) {
+		return rows;
+	}
+
+	return %orig;
+}
+
+// This patches the amount of columns in a folder in landscape mode
+- (NSUInteger)numberOfLandscapeColumns {
+	[self checkIfFolder];
+
+	if (self.isOldFolder && !self.check) {
+		return columns;
+	}
+
+	return %orig;
+}
+
 // Patches the 'check' and 'isOldFolder' properties to be false on the initialization of the class
 - (instancetype)init {
     self = %orig;
@@ -373,14 +470,70 @@ static id lastIconSuccess = nil;
 }
 
 // Patches a crash that happened prior to this hook's existence
-+ (id)gridImageForLayout:(id)arg1 previousGridImage:(id)arg2 previousGridCellIndexToUpdate:(unsigned long long)arg3 pool:(id)arg4 cellImageDrawBlock:(id)arg5 {
++ (id)gridImageForLayout:(SBIconListGridLayout *)layout previousGridImage:(id)previousGridImage previousGridCellIndexToUpdate:(NSUInteger)previousGridCellIndexToUpdate pool:(id)pool cellImageDrawBlock:(id)drawBlock {
 	@try {
 		return %orig;
 		lastIconSuccess = %orig;
 	} @catch (NSException *exception) {
-		NSLog(@"[Nightwind] -> EXCEPTION -> %@", exception);
 		return lastIconSuccess;
 	}
+}
+
++ (CGRect)rectAtIndex:(NSUInteger)index inLayout:(SBIconListGridLayout *)layout maxCount:(NSUInteger)maxCount {
+	// App Library Folders
+	if (layout.layoutConfiguration.numberOfPortraitColumns == 2) {
+		return %orig;
+	}
+
+	layout.layoutConfiguration.check = true;
+
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		layout.layoutConfiguration.numberOfPortraitColumns = 4;
+		layout.layoutConfiguration.numberOfPortraitRows = MIN(rows, 5);
+	} else {
+		layout.layoutConfiguration.numberOfPortraitColumns = 3;
+		layout.layoutConfiguration.numberOfPortraitRows = MIN(rows, 4);
+	}
+
+	return %orig;
+}
+
++ (NSUInteger)numberOfRowsForNumberOfCells:(NSUInteger)numberOfCells inLayout:(SBIconListGridLayout *)layout {
+	// App Library Folders
+	if (layout.layoutConfiguration.numberOfPortraitColumns == 2) {
+		return %orig;
+	}
+
+	layout.layoutConfiguration.check = true;
+
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		layout.layoutConfiguration.numberOfPortraitColumns = 4;
+		layout.layoutConfiguration.numberOfPortraitRows = MIN(rows, 5);
+	} else {
+		layout.layoutConfiguration.numberOfPortraitColumns = 3;
+		layout.layoutConfiguration.numberOfPortraitRows = MIN(rows, 4);
+	}
+
+	return %orig;
+}
+
++ (CGSize)sizeForLayout:(SBIconListGridLayout *)layout {
+	// App Library Folders
+	if (layout.layoutConfiguration.numberOfPortraitColumns == 2) {
+		return %orig;
+	}
+
+	layout.layoutConfiguration.check = true;
+
+	if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		layout.layoutConfiguration.numberOfPortraitColumns = 4;
+		layout.layoutConfiguration.numberOfPortraitRows = MIN(rows, 5);
+	} else {
+		layout.layoutConfiguration.numberOfPortraitColumns = 3;
+		layout.layoutConfiguration.numberOfPortraitRows = MIN(rows, 4);
+	}
+
+	return %orig;
 }
 
 %end
@@ -491,8 +644,8 @@ static id lastIconSuccess = nil;
 	SBIconGridImage *image = (SBIconGridImage *)self.image;
 
 	if ([image iconImageAtIndex:1]) {
-		NSArray *paddingArray = @[@0, @8, @8.5, @8.5, @8.5, @8.5, @8.5, @8.5];
-		NSUInteger padding = (NSUInteger)[paddingArray[rows - 3] integerValue];
+		CGFloat paddingArray[] = { 0, 8, 8.5, 8.5, 8.5, 8.5, 8.5, 8.5 };
+		CGFloat padding = paddingArray[rows - 3];
 
 		CGAffineTransform originalIconView = (self.transform);
 		self.transform = CGAffineTransformMake(
@@ -533,7 +686,7 @@ static id lastIconSuccess = nil;
 - (void)layoutSubviews {
 	%orig;
 
-	if (!folderBackground_portrait && ![[self _viewControllerForAncestor] isKindOfClass:%c(SBHLibraryCategoryIconViewController)]) {
+	if (!folderBackground && ![[self _viewControllerForAncestor] isKindOfClass:%c(SBHLibraryCategoryIconViewController)]) {
 		for (UIView *subview in self.subviews) {
 			if (![subview subviews] || [subview isKindOfClass:%c(MTMaterialView)]) {
 				[subview setAlpha:0];
@@ -594,6 +747,17 @@ static id lastIconSuccess = nil;
 	rows = uintForKey(@"rows", 3);
 	columns = uintForKey(@"columns", 3);
 
+	// These contain the _portrait suffix for backwards compatibility
+	titleScale = doubleForKey(@"titleScale_portrait", 1);
+	subtitleScale = doubleForKey(@"subtitleScale_portrait", 1);
+	titleTransparency = doubleForKey(@"titleTransparency_portrait", 1);
+	subtitleTransparency = doubleForKey(@"subtitleTransparency_portrait", 0.5);
+	iconScale = doubleForKey(@"iconScale_portrait", 1);
+
+	homescreenIconBlur = boolForKey(@"homescreenIconBlur_portrait", true);
+
+	folderBackground = boolForKey(@"folderBackground_portrait", true);
+
 	/*
 	|======================|
 	| Portrait Preferences |
@@ -605,47 +769,25 @@ static id lastIconSuccess = nil;
 	horizontalIconInset_portrait = intForKey(@"horizontalIconInset_portrait", 0);
 	topIconInset_portrait = intForKey(@"topIconInset_portrait", 0);
 	horizontalOffset_portrait = intForKey(@"horizontalOffset_portrait", 0);
-
-	titleScale_portrait = doubleForKey(@"titleScale_portrait", 1);
-	subtitleScale_portrait = doubleForKey(@"subtitleScale_portrait", 1);
-	titleTransparency_portrait = doubleForKey(@"titleTransparency_portrait", 1);
-	subtitleTransparency_portrait = doubleForKey(@"subtitleTransparency_portrait", 0.5);
 	verticalIconSpacing_portrait = uintForKey(@"verticalIconSpacing_portrait", 50);
-	iconScale_portrait = doubleForKey(@"iconScale_portrait", 1);
 
-	homescreenIconBlur_portrait = boolForKey(@"homescreenIconBlur_portrait", true);
+	/*
+	|=======================|
+	| Landscape Preferences |
+	|=======================|
+	*/
 
-	folderBackground_portrait = boolForKey(@"folderBackground_portrait", true);
+	titleOffset_landscape = intForKey(@"titleOffset_landscape", 0);
+	subtitleOffset_landscape = intForKey(@"subtitleOffset_landscape", 0);
+	horizontalIconInset_landscape = intForKey(@"horizontalIconInset_landscape", 0);
+	topIconInset_landscape = intForKey(@"topIconInset_landscape", 0);
+	horizontalOffset_landscape = intForKey(@"horizontalOffset_landscape", 0);
+	verticalIconSpacing_landscape = uintForKey(@"verticalIconSpacing_landscape", 50);
 
 	if (tweakEnabled) {
 		%init;
 	}
 }
-
-/*
-|==================================================================|
-| Landscape Preferences                                            |
-| ---------------------------------------------------------------- |
-| The original Bolders had landscape as well.                      |
-| However, since landscape is pretty much broken on iOS 14 and 15, |
-| Landscape support is not planned at the moment.                  |
-|==================================================================|
-*/
-
-// titleOffset_landscape = intForKey(@"titleOffset_landscape", 0);
-// subtitleOffset_landscape = intForKey(@"subtitleOffset_landscape", 0);
-// horizontalIconInset_landscape = intForKey(@"horizontalIconInset_landscape", 0);
-// topIconInset_landscape = intForKey(@"topIconInset_landscape", 0);
-// horizontalOffset_landscape = intForKey(@"horizontalOffset_landscape", 0);
-
-// titleScale_landscape = doubleForKey(@"titleScale_landscape", 1);
-// subtitleScale_landscape = doubleForKey(@"subtitleScale_landscape", 1);
-// titleTransparency_landscape = doubleForKey(@"titleTransparency_landscape", 1);
-// subtitleTransparency_landscape = doubleForKey(@"subtitleTransparency_landscape", 0.5);
-// verticalIconSpacing_landscape = uintForKey(@"verticalIconSpacing_landscape", 50);
-// iconScale_landscape = doubleForKey(@"iconScale_landscape", 1);
-
-// homescreenIconBlur_landscape = boolForKey(@"homescreenIconBlur_landscape", true);
 
 /*
 |===========================|

@@ -17,15 +17,16 @@
 	NSDictionary *dict = localizationDictionary();
 
 	for (PSSpecifier *specifier in _specifiers) {
-		NSString *origName = specifier.name;
+		NSString *localized = [dict objectForKey:specifier.name];
 
-		NSString *loc = [dict objectForKey:origName];
-		NSString *footerTextLoc = [dict objectForKey:[specifier propertyForKey:@"footerText"]];
-		NSString *defaultTextLoc = [dict objectForKey:[specifier propertyForKey:@"default"]];
+		if (localized) {
+			NSString *footerTextLocalized = [dict objectForKey:[specifier propertyForKey:@"footerText"]];
+			NSString *defaultTextLocalized = [dict objectForKey:[specifier propertyForKey:@"default"]];
 
-		[specifier setProperty:footerTextLoc forKey:@"footerText"];
-		[specifier setProperty:defaultTextLoc forKey:@"default"];
-		specifier.name = loc;
+			[specifier setProperty:footerTextLocalized forKey:@"footerText"];
+			[specifier setProperty:defaultTextLocalized forKey:@"default"];
+			specifier.name = localized;
+		}
 	}
 
 	NSString *origTitle = self.title;

@@ -8,54 +8,6 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>TITLE_SCALE</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSliderCell</string>
-			<key>cellClass</key>
-			<string>BoldersRebornSliderCell</string>
-			<key>default</key>
-			<string>1</string>
-			<key>defaults</key>
-			<string>com.nightwind.boldersrebornprefs</string>
-			<key>key</key>
-			<string>titleScale_portrait</string>
-			<key>max</key>
-			<string>1.5</string>
-			<key>min</key>
-			<string>0.5</string>
-			<key>showValue</key>
-			<string>1</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>TITLE_TRANSPARENCY</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSliderCell</string>
-			<key>cellClass</key>
-			<string>BoldersRebornSliderCell</string>
-			<key>default</key>
-			<string>1</string>
-			<key>defaults</key>
-			<string>com.nightwind.boldersrebornprefs</string>
-			<key>key</key>
-			<string>titleTransparency_portrait</string>
-			<key>max</key>
-			<string>1</string>
-			<key>min</key>
-			<string>0</string>
-			<key>showValue</key>
-			<string>1</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
 			<string>TITLE_OFFSET</string>
 		</dict>
 		<dict>
@@ -73,54 +25,6 @@
 			<string>250</string>
 			<key>min</key>
 			<string>-250</string>
-			<key>showValue</key>
-			<string>1</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>SUBTITLE_SCALE</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSliderCell</string>
-			<key>cellClass</key>
-			<string>BoldersRebornSliderCell</string>
-			<key>default</key>
-			<string>1</string>
-			<key>defaults</key>
-			<string>com.nightwind.boldersrebornprefs</string>
-			<key>key</key>
-			<string>subtitleScale_portrait</string>
-			<key>max</key>
-			<string>1.5</string>
-			<key>min</key>
-			<string>0.5</string>
-			<key>showValue</key>
-			<string>1</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>SUBTITLE_TRANSPARENCY</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSliderCell</string>
-			<key>cellClass</key>
-			<string>BoldersRebornSliderCell</string>
-			<key>default</key>
-			<string>0.5</string>
-			<key>defaults</key>
-			<string>com.nightwind.boldersrebornprefs</string>
-			<key>key</key>
-			<string>subtitleTransparency_portrait</string>
-			<key>max</key>
-			<string>1</string>
-			<key>min</key>
-			<string>0</string>
 			<key>showValue</key>
 			<string>1</string>
 		</dict>
@@ -168,9 +72,9 @@
 			<key>key</key>
 			<string>horizontalIconInset_portrait</string>
 			<key>max</key>
-			<string>25</string>
+			<string>100</string>
 			<key>min</key>
-			<string>-25</string>
+			<string>-100</string>
 			<key>showValue</key>
 			<string>1</string>
 		</dict>
@@ -252,74 +156,8 @@
 			<key>showValue</key>
 			<string>1</string>
 		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>ICON_SCALE</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSliderCell</string>
-			<key>cellClass</key>
-			<string>BoldersRebornSliderCell</string>
-			<key>default</key>
-			<string>1</string>
-			<key>defaults</key>
-			<string>com.nightwind.boldersrebornprefs</string>
-			<key>key</key>
-			<string>iconScale_portrait</string>
-			<key>max</key>
-			<string>2</string>
-			<key>min</key>
-			<string>0.5</string>
-			<key>showValue</key>
-			<string>1</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>footerText</key>
-			<string>HOMESCREEN_FOLDER_BACKGROUND_FOOTER_TEXT</string>
-			<key>label</key>
-			<string>HOMESCREEN_FOLDER_BACKGROUND</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<string>1</string>
-			<key>defaults</key>
-			<string>com.nightwind.boldersrebornprefs</string>
-			<key>key</key>
-			<string>folderBackground_portrait</string>
-			<key>label</key>
-			<string>FOLDER_BACKGROUND</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>footerText</key>
-			<string>HOMESCREEN_ICON_BLUR_FOOTER_TEXT</string>
-			<key>label</key>
-			<string>HOMESCREEN_ICON_BLUR</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>cellClass</key>
-			<string>BoldersRebornInfoSwitchCell</string>
-			<key>default</key>
-			<string>1</string>
-			<key>defaults</key>
-			<string>com.nightwind.boldersrebornprefs</string>
-			<key>key</key>
-			<string>homescreenIconBlur_portrait</string>
-			<key>label</key>
-			<string>HOMESCREEN_BLUR</string>
-		</dict>
 	</array>
 	<key>title</key>
-	<string>HOMESCREEN</string>
+	<string>PORTRAIT</string>
 </dict>
 </plist>
