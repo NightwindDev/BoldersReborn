@@ -16,6 +16,8 @@ static BOOL deviceIsInLandscapeMode(void) {
 	return UIDeviceOrientationIsLandscape(orientation);
 }
 
+static CGFloat kPaddingArray[] = { 0, 8, 8.5, 8.5, 8.5, 8.5, 8.5, 8.5 };
+
 static id lastIconSuccess = nil;
 
 // This hook hides the background square of the original folder layout
@@ -593,12 +595,26 @@ static id lastIconSuccess = nil;
     %orig;
 
 	if (UIDevice.currentDevice.systemVersion.floatValue < 15.0) {
-		self.layer.masksToBounds = true;
-		CAShapeLayer *maskLayer = [CAShapeLayer layer];
-		maskLayer.frame = self.bounds;
-		UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(-self.frame.origin.x, 0, self.bounds.size.width + (self.frame.origin.x * 2), self.bounds.size.height - 10.8) byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerBottomRight) cornerRadii:CGSizeMake(14, 14)];
-		maskLayer.path = maskPath.CGPath;
-		self.layer.mask = maskLayer;
+		UIViewController *const viewController = [self _viewControllerForAncestor];
+
+		if (viewController && ![viewController isKindOfClass:%c(SBHLibraryCategoryIconViewController)]) {
+			CGFloat padding = kPaddingArray[rows - 3];
+
+			self.layer.masksToBounds = true;
+			
+			CAShapeLayer *maskLayer = [CAShapeLayer layer];
+			maskLayer.frame = self.bounds;
+
+			UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(
+				-self.superview.frame.origin.x, 
+				-self.superview.frame.origin.y - padding, 
+				self.superview.superview.bounds.size.width, 
+				self.superview.superview.bounds.size.height
+			) byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerBottomRight) cornerRadii:CGSizeMake(14, 14)];
+
+			maskLayer.path = maskPath.CGPath;
+			self.layer.mask = maskLayer;
+		}
 	}
 
 	SBIconGridImage *image = (SBIconGridImage *)self.image;
@@ -644,8 +660,7 @@ static id lastIconSuccess = nil;
 	SBIconGridImage *image = (SBIconGridImage *)self.image;
 
 	if ([image iconImageAtIndex:1]) {
-		CGFloat paddingArray[] = { 0, 8, 8.5, 8.5, 8.5, 8.5, 8.5, 8.5 };
-		CGFloat padding = paddingArray[rows - 3];
+		CGFloat padding = kPaddingArray[rows - 3];
 
 		CGAffineTransform originalIconView = (self.transform);
 		self.transform = CGAffineTransformMake(
