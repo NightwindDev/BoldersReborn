@@ -27,7 +27,7 @@ jobs:
       # Only the one SDK the Makefile pins; a full theos/sdks clone is huge.
       - name: Fetch iOS SDK pinned in Makefile
         run: |
-          sdk=$(sed -n 's/^TARGET[^=]*=[[:space:]]*iphone:clang:\([0-9.]*\).*/\1/p' Makefile | head -1)
+          sdk=$(sed -n 's/^.*TARGET[^=]*=[[:space:]]*iphone:clang:\([0-9.]*\).*/\1/p' Makefile | head -1)
           if [ -z "$sdk" ]; then
             echo "TARGET in Makefile does not pin an explicit SDK version" >&2
             exit 1
