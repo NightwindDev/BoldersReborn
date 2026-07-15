@@ -1,0 +1,67 @@
+name: Build tweak
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install build tools
+        run: brew install make ldid xz
+
+      - name: Checkout Theos
+        uses: actions/checkout@v4
+        with:
+          repository: theos/theos
+          path: theos
+          submodules: recursive
+
+      # Only the one SDK the Makefile pins; a full theos/sdks clone is huge.
+      - name: Fetch iOS SDK pinned in Makefile
+        run: |
+          sdk=$(sed -n 's/^TARGET[^=]*=[[:space:]]*iphone:clang:\([0-9.]*\).*/\1/p' Makefile | head -1)
+          if [ -z "$sdk" ]; then
+            echo "TARGET in Makefile does not pin an explicit SDK version" >&2
+            exit 1
+          fi
+          echo "Using iPhoneOS${sdk}.sdk"
+          git clone --depth=1 --filter=tree:0 --no-checkout https://github.com/theos/sdks.git /tmp/sdks
+          git -C /tmp/sdks sparse-checkout set "iPhoneOS${sdk}.sdk"
+          git -C /tmp/sdks checkout
+          mkdir -p theos/sdks
+          mv "/tmp/sdks/iPhoneOS${sdk}.sdk" theos/sdks/
+
+      - name: Build package
+        run: |
+          export PATH="$(brew --prefix make)/libexec/gnubin:$PATH"
+          make package FINALPACKAGE=1
+        env:
+          THEOS: ${{ github.workspace }}/theos
+
+      - name: Read package info
+        id: info
+        run: |
+          echo "version=$(awk '/^Version:/ {print $2}' control)" >> "$GITHUB_OUTPUT"
+          echo "name=$(awk '/^TWEAK_NAME/ {print $NF}' Makefile)" >> "$GITHUB_OUTPUT"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.info.outputs.name }}-${{ steps.info.outputs.version }}
+          path: packages/*.deb
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.info.outputs.version }}
+          name: ${{ steps.info.outputs.name }} ${{ steps.info.outputs.version }}
+          prerelease: ${{ github.ref != 'refs/heads/main' }}
+          files: packages/*.deb
