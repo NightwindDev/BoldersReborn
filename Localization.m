@@ -6,11 +6,20 @@ NSDictionary *localizationDictionary(void) {
 	static dispatch_once_t onceToken;
 
 	dispatch_once(&onceToken, ^{
-		NSString *const genericPath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/LANG.lproj/Localization.strings");
-		NSString *filePath = [genericPath stringByReplacingOccurrencesOfString:@"LANG" withString:NSLocale.currentLocale.languageCode];
+		NSString *const locDir = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization");
+
+		NSMutableArray<NSString *> *available = [NSMutableArray new];
+		for (NSString *name in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:locDir error:nil]) {
+			if ([name hasSuffix:@".lproj"]) {
+				[available addObject:name.stringByDeletingPathExtension];
+			}
+		}
+
+		NSString *best = [NSBundle preferredLocalizationsFromArray:available].firstObject ?: @"en";
+		NSString *filePath = [locDir stringByAppendingFormat:@"/%@.lproj/Localization.strings", best];
 
 		if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-			filePath = ROOT_PATH_NS(@"/Library/PreferenceBundles/BoldersRebornPrefs.bundle/Localization/en.lproj/Localization.strings");
+			filePath = [locDir stringByAppendingString:@"/en.lproj/Localization.strings"];
 		}
 
 		bundleDictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
